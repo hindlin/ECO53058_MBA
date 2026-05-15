@@ -254,6 +254,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div class="done-emoji" id="doneEmoji">🏆</div>
     <div class="done-title" id="doneTitle">Submitted!</div>
     <div class="done-sub" id="doneSub">Your score and reflection have been saved.</div>
+    <button class="submit-btn" id="pdfBtn" onclick="downloadPDF()" style="margin-bottom:12px">📄 Download My Results (PDF)</button>
     <button class="retry-btn" onclick="backToLock()">← Practice Another Chapter</button>
   </div>
 </div>
@@ -627,6 +628,7 @@ const TF = {
 // ── STATE ──────────────────────────────────────────────────
 let ch=0, mode='mcq', qIdx=0, score=0, correct=0, streak=0;
 let mcqList=[], tfList=[], answered=false;
+let quizHistory=[]; // track all answers for PDF
 const chNames={1:'Chapter 1 — Fundamentals',2:'Chapter 2 — Supply & Demand',3:'Chapter 3 — Elasticity',4:'Chapter 4 — Individual Behavior',5:'Chapter 5 — Production & Costs',6:'Chapter 6 — Competitive Markets',9:'Chapter 9 — Oligopoly Models',10:'Chapter 10 — Game Theory'};
 const chClass={1:'ch1',2:'ch2',3:'ch3',4:'ch4',5:'ch5',6:'ch6',9:'ch9',10:'ch10'};
 
@@ -660,7 +662,7 @@ function unlock() {
 function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 
 function startQuiz(n){
-  ch=n; mode='mcq'; qIdx=0; score=0; correct=0; streak=0;
+  ch=n; mode='mcq'; qIdx=0; score=0; correct=0; streak=0; quizHistory=[];
   mcqList = shuffle(MCQ[n]);
   tfList  = shuffle(TF[n]);
   document.getElementById('lockScreen').style.display='none';
@@ -743,12 +745,14 @@ function showFeedback(ok,q){
 function answerMCQ(i){
   if(answered)return;
   const q=currentList()[qIdx];
+  const ok=i===q.ans;
+  quizHistory.push({type:'MCQ',q:q.q,opts:q.opts,userAns:i,correctAns:q.ans,ok,exp:q.exp,concept:q.concept});
   document.querySelectorAll('.opt').forEach((b,j)=>{
     b.disabled=true;
     if(j===q.ans)b.classList.add('correct');
     else if(j===i&&i!==q.ans)b.classList.add('wrong');
   });
-  showFeedback(i===q.ans,q);
+  showFeedback(ok,q);
 }
 
 function answerTF(val){
@@ -756,6 +760,7 @@ function answerTF(val){
   const q=currentList()[qIdx];
   document.querySelectorAll('.tf').forEach(b=>b.disabled=true);
   const ok=val===q.ans;
+  quizHistory.push({type:'TF',q:q.q,userAns:val,correctAns:q.ans,ok,exp:q.exp,concept:q.concept});
   document.querySelectorAll('.tf').forEach(b=>{
     const isT=b.textContent.includes('TRUE');
     if((isT&&q.ans)||(!isT&&!q.ans))b.classList.add('correct');
@@ -792,11 +797,13 @@ function updateCount(){
   document.getElementById('reflCount').textContent=n+' characters';
 }
 
+let studentName='', studentRefl='', studentPct=0;
 function submitResults(){
   const name=document.getElementById('nameInp').value.trim();
   const refl=document.getElementById('reflText').value.trim();
   if(!name){alert('Please enter your full name.');return;}
   if(refl.length<30){alert('Please write at least 30 characters in your reflection.');return;}
+  studentName=name; studentRefl=refl;
 
   const btn=document.getElementById('submitBtn');
   btn.disabled=true;btn.textContent='Submitting…';
@@ -816,7 +823,7 @@ function submitResults(){
     .catch(()=>showDone(pct));
 }
 
-function showDone(pct){
+function showDone(pct){ studentPct=pct;
   document.getElementById('reflScreen').style.display='none';
   const ds=document.getElementById('doneScreen');
   ds.classList.remove('hidden');ds.style.display='block';
@@ -835,6 +842,167 @@ function backToLock(){
   document.getElementById('pwErr').classList.add('hidden');
   document.querySelectorAll('.ch-btn').forEach(b=>{b.style.opacity='1';b.style.borderColor='';});
   selectedCh=0;
+}
+
+function downloadPDF(){
+  const btn=document.getElementById('pdfBtn');
+  btn.textContent='Generating…'; btn.disabled=true;
+
+  const script=document.createElement('script');
+  script.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+  script.onload=function(){
+    const {jsPDF}=window.jspdf;
+    const doc=new jsPDF({unit:'mm',format:'a4'});
+    const pw=210, pl=15, pr=195, lh=6;
+    let y=15;
+
+    const chName=chNames[ch]||'Chapter '+ch;
+    const grade=studentPct>=90?'A':studentPct>=80?'B':studentPct>=70?'C':studentPct>=60?'D':'F';
+    const date=new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'});
+
+    // ── HEADER ──
+    doc.setFillColor(30,106,124);
+    doc.rect(0,0,210,22,'F');
+    doc.setTextColor(255,255,255);
+    doc.setFont('helvetica','bold'); doc.setFontSize(14);
+    doc.text('ECO5305 — Advanced Managerial Economics',pl,10);
+    doc.setFontSize(10); doc.setFont('helvetica','normal');
+    doc.text('Al Akhawayn University · Dr. Hind Lebdaoui',pl,17);
+    y=30;
+
+    // ── STUDENT INFO BOX ──
+    doc.setFillColor(240,246,248);
+    doc.rect(pl,y,180,22,F='F');
+    doc.setTextColor(30,106,124); doc.setFont('helvetica','bold'); doc.setFontSize(11);
+    doc.text(studentName,pl+3,y+8);
+    doc.setTextColor(80,80,80); doc.setFont('helvetica','normal'); doc.setFontSize(9);
+    doc.text(chName,pl+3,y+14);
+    doc.text(date,pl+3,y+19);
+    // Score badge
+    doc.setFillColor(30,106,124);
+    doc.roundedRect(pr-45,y+2,42,18,3,3,'F');
+    doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(16);
+    doc.text(studentPct+'%',pr-38,y+12);
+    doc.setFontSize(9); doc.setFont('helvetica','normal');
+    doc.text('Grade: '+grade,pr-38,y+18);
+    y+=28;
+
+    // ── SCORE SUMMARY LINE ──
+    doc.setTextColor(60,60,60); doc.setFont('helvetica','normal'); doc.setFontSize(9);
+    const corr=quizHistory.filter(h=>h.ok).length;
+    doc.text(`Score: ${corr}/20 correct  (${20-corr} incorrect)  |  Submitted: ${date}`,pl,y);
+    y+=4;
+    doc.setDrawColor(200,200,200); doc.line(pl,y,pr,y);
+    y+=6;
+
+    // ── QUESTIONS ──
+    quizHistory.forEach((h,i)=>{
+      const num=i+1;
+      const section=i<10?'MCQ '+(i+1):'T/F '+(i-9);
+      const isOk=h.ok;
+      const statusColor=isOk?[16,155,117]:[220,60,60];
+
+      // Check page space
+      const neededH=h.type==='MCQ'?32:22;
+      if(y+neededH>280){doc.addPage();y=15;}
+
+      // Question number + status dot
+      doc.setFillColor(...statusColor);
+      doc.circle(pl+2,y+2,2,'F');
+      doc.setTextColor(40,40,40); doc.setFont('helvetica','bold'); doc.setFontSize(9);
+      doc.text(section,pl+6,y+3.5);
+
+      // Concept tag
+      doc.setFillColor(240,246,248);
+      doc.roundedRect(pr-70,y-1,68,7,2,2,'F');
+      doc.setTextColor(30,106,124); doc.setFont('helvetica','normal'); doc.setFontSize(7.5);
+      const conceptTxt=h.concept.length>38?h.concept.substring(0,36)+'…':h.concept;
+      doc.text(conceptTxt,pr-68,y+4);
+      y+=7;
+
+      // Question text
+      doc.setTextColor(40,40,40); doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
+      const qLines=doc.splitTextToSize(h.q,175);
+      doc.text(qLines,pl+4,y);
+      y+=qLines.length*4.5;
+
+      if(h.type==='MCQ'){
+        // Options
+        h.opts.forEach((opt,j)=>{
+          const isCorrect=j===h.correctAns;
+          const isUser=j===h.userAns;
+          if(isCorrect){doc.setTextColor(16,155,117);doc.setFont('helvetica','bold');}
+          else if(isUser&&!isCorrect){doc.setTextColor(220,60,60);doc.setFont('helvetica','normal');}
+          else{doc.setTextColor(140,140,140);doc.setFont('helvetica','normal');}
+          const prefix=isCorrect?'✓ ':isUser&&!isCorrect?'✗ ':'  ';
+          const optLines=doc.splitTextToSize(prefix+(j===0?'A':j===1?'B':j===2?'C':'D')+'. '+opt,168);
+          if(y+optLines.length*4>280){doc.addPage();y=15;}
+          doc.text(optLines,pl+6,y);
+          y+=optLines.length*4;
+        });
+        y+=1;
+      } else {
+        // T/F
+        const userStr=h.userAns?'TRUE':'FALSE';
+        const corrStr=h.correctAns?'TRUE':'FALSE';
+        doc.setFont('helvetica','normal'); doc.setFontSize(8);
+        if(h.ok){doc.setTextColor(16,155,117);doc.text('Your answer: ✓ '+userStr,pl+6,y);}
+        else{doc.setTextColor(220,60,60);doc.text('Your answer: ✗ '+userStr+'   Correct: '+corrStr,pl+6,y);}
+        y+=4.5;
+      }
+
+      // Explanation
+      if(y+8>280){doc.addPage();y=15;}
+      doc.setFillColor(248,252,250);
+      const expLines=doc.splitTextToSize(h.exp,170);
+      const expH=expLines.length*3.8+4;
+      doc.rect(pl+3,y,174,expH,'F');
+      doc.setTextColor(60,90,80); doc.setFont('helvetica','italic'); doc.setFontSize(7.5);
+      doc.text(expLines,pl+5,y+3.5);
+      y+=expH+4;
+
+      // Divider
+      if(i<19){
+        if(y+2>280){doc.addPage();y=15;}
+        doc.setDrawColor(230,230,230); doc.line(pl,y,pr,y); y+=3;
+      }
+    });
+
+    // ── REFLECTION ──
+    if(y+25>280){doc.addPage();y=15;}
+    doc.setFillColor(240,246,248);
+    doc.rect(pl,y,180,8,'F');
+    doc.setTextColor(30,106,124); doc.setFont('helvetica','bold'); doc.setFontSize(10);
+    doc.text('My Reflection',pl+3,y+5.5);
+    y+=11;
+    doc.setTextColor(60,60,60); doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
+    const reflLines=doc.splitTextToSize(studentRefl,175);
+    reflLines.forEach(line=>{
+      if(y+5>285){doc.addPage();y=15;}
+      doc.text(line,pl,y); y+=4.5;
+    });
+
+    // ── FOOTER on each page ──
+    const pageCount=doc.internal.getNumberOfPages();
+    for(let i=1;i<=pageCount;i++){
+      doc.setPage(i);
+      doc.setFillColor(30,106,124);
+      doc.rect(0,287,210,10,'F');
+      doc.setTextColor(255,255,255); doc.setFont('helvetica','normal'); doc.setFontSize(7.5);
+      doc.text('ECO5305 Practice Results · AUI · Dr. Hind Lebdaoui',pl,293);
+      doc.text(`Page ${i} of ${pageCount}`,pr-20,293);
+    }
+
+    // Save
+    const safeName=studentName.replace(/[^a-zA-Z0-9]/g,'_');
+    doc.save(`ECO5305_${chName.replace(/[^a-zA-Z0-9]/g,'_')}_${safeName}.pdf`);
+    btn.textContent='📄 Download My Results (PDF)'; btn.disabled=false;
+  };
+  script.onerror=function(){
+    btn.textContent='📄 Download My Results (PDF)'; btn.disabled=false;
+    alert('PDF library failed to load. Please check your internet connection.');
+  };
+  document.head.appendChild(script);
 }
 </script>
 </body>
