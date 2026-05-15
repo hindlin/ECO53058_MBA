@@ -254,7 +254,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div class="done-emoji" id="doneEmoji">🏆</div>
     <div class="done-title" id="doneTitle">Submitted!</div>
     <div class="done-sub" id="doneSub">Your score and reflection have been saved.</div>
-    <button class="submit-btn" id="pdfBtn" onclick="downloadPDF()" style="margin-bottom:12px">📄 Download My Results (PDF)</button>
+    <button id="pdfBtn" onclick="downloadPDF()" style="width:100%;padding:13px;border-radius:12px;border:2px solid #1e6a7c;background:#1e6a7c;color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;margin-bottom:12px;transition:opacity .2s;">📄 Download My Results (PDF)</button>
     <button class="retry-btn" onclick="backToLock()">← Practice Another Chapter</button>
   </div>
 </div>
@@ -826,7 +826,10 @@ function submitResults(){
 function showDone(pct){ studentPct=pct;
   document.getElementById('reflScreen').style.display='none';
   const ds=document.getElementById('doneScreen');
-  ds.classList.remove('hidden');ds.style.display='block';
+  ds.classList.remove('hidden');
+  ds.classList.remove('quiz');
+  ds.style.display='flex';
+  ds.style.justifyContent='center';
   const emoji=pct>=90?'🏆':pct>=70?'🎯':pct>=50?'📚':'💪';
   const title=pct>=90?'Outstanding!':pct>=70?'Well done!':pct>=50?'Good effort!':'Keep going!';
   document.getElementById('doneEmoji').textContent=emoji;
@@ -835,8 +838,10 @@ function showDone(pct){ studentPct=pct;
 }
 
 function backToLock(){
-  document.getElementById('doneScreen').style.display='none';
-  document.getElementById('doneScreen').classList.add('hidden');
+  const ds=document.getElementById('doneScreen');
+  ds.style.display='none';
+  ds.classList.add('hidden');
+  ds.classList.add('quiz');
   document.getElementById('lockScreen').style.display='flex';
   document.getElementById('pwInp').value='';
   document.getElementById('pwErr').classList.add('hidden');
