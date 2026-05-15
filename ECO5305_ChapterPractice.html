@@ -12,7 +12,7 @@
   --green:#22c55e; --green-bg:rgba(34,197,94,.1); --green-border:rgba(34,197,94,.3);
   --red:#f87171; --red-bg:rgba(248,113,113,.08); --red-border:rgba(248,113,113,.25);
   --gold:#f59e0b;
-  --ch1:#8b5cf6; --ch2:#06b6d4; --ch3:#f59e0b;
+  --ch1:#8b5cf6; --ch2:#06b6d4; --ch3:#f59e0b; --ch4:#10b981; --ch5:#ef4444; --ch6:#f97316; --ch9:#ec4899; --ch10:#6366f1;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;}
@@ -32,6 +32,11 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .ch-btn[data-ch="1"] .ch-dot{background:var(--ch1);}
 .ch-btn[data-ch="2"] .ch-dot{background:var(--ch2);}
 .ch-btn[data-ch="3"] .ch-dot{background:var(--ch3);}
+.ch-btn[data-ch="4"] .ch-dot{background:var(--ch4);}
+.ch-btn[data-ch="5"] .ch-dot{background:var(--ch5);}
+.ch-btn[data-ch="6"] .ch-dot{background:var(--ch6);}
+.ch-btn[data-ch="9"] .ch-dot{background:var(--ch9);}
+.ch-btn[data-ch="10"] .ch-dot{background:var(--ch10);}
 .pw-row{display:flex;gap:8px;}
 .pw-inp{flex:1;padding:12px 16px;background:var(--s2);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-family:'DM Mono',monospace;font-size:0.95rem;outline:none;transition:border-color .2s;}
 .pw-inp:focus{border-color:var(--accent);}
@@ -50,6 +55,11 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .ch-badge.ch1{background:rgba(139,92,246,.15);color:var(--ch1);border:1px solid rgba(139,92,246,.3);}
 .ch-badge.ch2{background:rgba(6,182,212,.15);color:var(--ch2);border:1px solid rgba(6,182,212,.3);}
 .ch-badge.ch3{background:rgba(245,158,11,.15);color:var(--ch3);border:1px solid rgba(245,158,11,.3);}
+.ch-badge.ch4{background:rgba(16,185,129,.15);color:var(--ch4);border:1px solid rgba(16,185,129,.3);}
+.ch-badge.ch5{background:rgba(239,68,68,.15);color:var(--ch5);border:1px solid rgba(239,68,68,.3);}
+.ch-badge.ch6{background:rgba(249,115,22,.15);color:var(--ch6);border:1px solid rgba(249,115,22,.3);}
+.ch-badge.ch9{background:rgba(236,72,153,.15);color:var(--ch9);border:1px solid rgba(236,72,153,.3);}
+.ch-badge.ch10{background:rgba(99,102,241,.15);color:var(--ch10);border:1px solid rgba(99,102,241,.3);}
 .section-badge{padding:5px 12px;border-radius:6px;background:rgba(79,142,247,.12);color:var(--accent);border:1px solid rgba(79,142,247,.25);font-family:'DM Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:.5px;}
 .score-chips{margin-left:auto;display:flex;gap:10px;}
 .chip{font-family:'DM Mono',monospace;font-size:0.78rem;padding:5px 12px;border-radius:8px;background:var(--s2);border:1px solid var(--border);}
@@ -63,6 +73,11 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .prog-fill.ch1{background:var(--ch1);}
 .prog-fill.ch2{background:var(--ch2);}
 .prog-fill.ch3{background:var(--ch3);}
+.prog-fill.ch4{background:var(--ch4);}
+.prog-fill.ch5{background:var(--ch5);}
+.prog-fill.ch6{background:var(--ch6);}
+.prog-fill.ch9{background:var(--ch9);}
+.prog-fill.ch10{background:var(--ch10);}
 .prog-lbl{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);white-space:nowrap;}
 
 /* Card */
@@ -162,6 +177,21 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <button class="ch-btn" data-ch="3" onclick="selectChapter(3,this)">
         <span class="ch-dot"></span>Chapter 3 — Quantitative Demand Analysis
       </button>
+      <button class="ch-btn" data-ch="4" onclick="selectChapter(4,this)">
+        <span class="ch-dot"></span>Chapter 4 — Theory of Individual Behavior
+      </button>
+      <button class="ch-btn" data-ch="5" onclick="selectChapter(5,this)">
+        <span class="ch-dot"></span>Chapter 5 — The Production Process and Costs
+      </button>
+      <button class="ch-btn" data-ch="6" onclick="selectChapter(6,this)">
+        <span class="ch-dot"></span>Chapter 6 — Managing in Competitive Markets
+      </button>
+      <button class="ch-btn" data-ch="9" onclick="selectChapter(9,this)">
+        <span class="ch-dot"></span>Chapter 9 — Basic Oligopoly Models
+      </button>
+      <button class="ch-btn" data-ch="10" onclick="selectChapter(10,this)">
+        <span class="ch-dot"></span>Chapter 10 — Game Theory: Inside Oligopoly
+      </button>
     </div>
 
     <div class="pw-row">
@@ -230,7 +260,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 <script>
 // ── PASSWORDS ──────────────────────────────────────────────
-const PASSWORDS = { 1:'eco5305ch1', 2:'eco5305ch2', 3:'eco5305ch3' };
+const PASSWORDS = { 1:'eco5305ch1', 2:'eco5305ch2', 3:'eco5305ch3', 4:'eco5305ch4', 5:'eco5305ch5', 6:'eco5305ch6', 9:'eco5305ch9', 10:'eco5305ch10' };
 // Change these passwords to whatever you like!
 
 // ── QUESTIONS ─────────────────────────────────────────────
@@ -389,7 +419,72 @@ const MCQ = {
    q:'Log-linear model: ln(Q)=3.8−1.4ln(P)+0.9ln(Y). Own-price elasticity = ?',
    opts:['−3.8 always','−1.4 at all prices','−0.9 always','Varies along the curve'],ans:1,
    exp:'In a log-linear model, coefficients ARE the constant elasticities: −1.4 is the price elasticity, 0.9 is the income elasticity, constant everywhere.',concept:'Constant Elasticity — Log-Linear Model'},
+],
+4:[
+  {diff:'easy',industry:'Retail',q:'Consumer equilibrium requires the consumer to equate:',opts:['Total utilities across goods','Marginal utility per dirham (MU/P) across all goods','Total spending per good','Prices of all goods'],ans:1,exp:'Equimarginal principle: MUx/Px = MUy/Py. Last dirham spent on each good yields equal satisfaction per dirham.',concept:'Consumer Equilibrium Condition'},
+  {diff:'medium',industry:'Finance',q:'The slope of the budget line equals:',opts:['MUx/MUy','-Px/Py','Total income divided by price','MRS at equilibrium only'],ans:1,exp:'Budget line slope = -Px/Py. Market rate at which X can be exchanged for Y given their prices.',concept:'Budget Line Slope'},
+  {diff:'medium',industry:'Strategy',q:'When consumer income increases the budget line:',opts:['Rotates around X-intercept','Shifts outward parallel to original','Becomes steeper','Shifts inward'],ans:1,exp:'Income change shifts entire budget line outward (rise) or inward (fall). Slope unchanged since prices constant.',concept:'Budget Line Income Change'},
+  {diff:'easy',industry:'Management',q:'Indifference curves slope downward because of which property?',opts:['Transitivity','Completeness','Monotonicity (non-satiation)','Convexity'],ans:2,exp:'Monotonicity: more is better. To keep utility constant while getting more X consumer must give up some Y. Creates downward slope.',concept:'Monotonicity and IC Slope'},
+  {diff:'medium',industry:'Consulting',q:'The substitution effect of a price decrease moves the consumer:',opts:['To a higher indifference curve','Along the same IC toward the now-cheaper good','Inward along the budget line','To a lower utility level'],ans:1,exp:'Substitution effect: movement along a given IC. When Px falls X is cheaper relative to Y so consumer substitutes toward X.',concept:'Substitution Effect Definition'},
+  {diff:'medium',industry:'Consumer',q:'For a normal good the income effect of a price decrease:',opts:['Reduces consumption','Increases consumption as real income rises','Has no impact on consumption','Reduces the budget'],ans:1,exp:'Price falls => real income rises. Normal good: higher real income increases consumption. Income effect reinforces substitution effect.',concept:'Income Effect Normal Good'},
+  {diff:'hard',industry:'Finance',q:'For an inferior good when price falls the income and substitution effects:',opts:['Both increase quantity demanded','Both decrease quantity demanded','Work in opposite directions','Are always equal in magnitude'],ans:2,exp:'Sub effect: more of good (cheaper). Income effect: less of inferior good (higher real income means less). Effects oppose each other.',concept:'Inferior Good Opposing Effects'},
+  {diff:'easy',industry:'Education',q:'Indifference curves further from the origin represent:',opts:['Lower utility','Same utility as closer curves','Higher utility','Lower prices only'],ans:2,exp:'Monotonicity: bundles further from origin contain more of both goods yielding higher utility.',concept:'IC Utility Levels'},
+  {diff:'medium',industry:'Marketing',q:'Consumer equilibrium is graphically found where:',opts:['Budget line crosses the highest IC','Budget line is tangent to the highest attainable IC','MUx equals MUy','Price ratio equals total income'],ans:1,exp:'Tangency: MRS = Px/Py. Consumer reaches maximum utility on the budget constraint at this tangency point.',concept:'Consumer Equilibrium Tangency'},
+  {diff:'medium',industry:'Operations',q:'When Px falls the budget line:',opts:['Shifts inward parallel','Rotates outward on X-axis only','Rotates inward on X-axis','Shifts outward parallel'],ans:1,exp:'Py and M unchanged: Y-intercept fixed. X-intercept = M/Px rises as Px falls. Budget line rotates outward on X-axis only.',concept:'Budget Line Price Change Rotation'}
+],
+
+5:[
+  {diff:'easy',industry:'Manufacturing',q:'The short run is defined as the period where:',opts:['All costs are variable','At least one input is fixed','Capital equals zero','The firm cannot hire labor'],ans:1,exp:'Short run: at least one factor (typically capital/plant size) is fixed. Managers adjust variable inputs within this constraint.',concept:'Short Run Definition'},
+  {diff:'medium',industry:'Operations',q:'Profit-maximizing firm should hire labor until:',opts:['VMPL exceeds wage','VMPL equals wage (w)','Marginal product equals zero','Total product is maximized'],ans:1,exp:'Hire labor until MB of labor (VMPL = P x MPL) equals MC of labor (wage). Stop at VMPL = w in diminishing MP range.',concept:'Profit-Maximizing Labor Rule'},
+  {diff:'medium',industry:'Finance',q:'The law of diminishing returns states that adding variable input to fixed input eventually:',opts:['Causes total product to fall immediately','Reduces marginal product of the variable input','Increases average fixed cost','Raises total cost to infinity'],ans:1,exp:'Eventually each additional worker adds less output than the previous one. Diminishing marginal returns to the variable input.',concept:'Law of Diminishing Returns'},
+  {diff:'easy',industry:'Strategy',q:'An isoquant shows:',opts:['All input combinations costing the same amount','All input combinations producing the same output level','The optimal input mix only','The total cost curve'],ans:1,exp:'Isoquant (iso=equal quant=quantity): all (K,L) combinations yielding identical output. Production equivalent of an indifference curve.',concept:'Isoquants Definition'},
+  {diff:'medium',industry:'Consulting',q:'MRTS along an isoquant measures:',opts:['The wage-rental ratio','Rate at which K substitutes for L holding output constant','Slope of the isocost line','Average product of capital'],ans:1,exp:'MRTS = -dK/dL = MPL/MPK along isoquant. Rate of capital-labor substitution maintaining constant output.',concept:'MRTS Definition'},
+  {diff:'medium',industry:'Manufacturing',q:'Cost minimization requires choosing inputs where:',opts:['MPL equals MPK','MPL/w equals MPK/r (equal output per dollar)','Labor equals capital in units','Total cost is zero'],ans:1,exp:'Cost-minimizing rule: MPL/w = MPK/r. Get equal marginal product per dollar from every input.',concept:'Cost Minimization Rule'},
+  {diff:'easy',industry:'Construction',q:'Fixed costs in the short run are:',opts:['Zero when output is zero','Sunk: paid regardless of output level','Equal to variable costs','Proportional to output'],ans:1,exp:'Fixed costs (rent, equipment) must be paid regardless of output. They are sunk in the short run and irrelevant to marginal decisions.',concept:'Fixed Costs Sunk in Short Run'},
+  {diff:'medium',industry:'Finance',q:'When MC is below ATC, average total cost is:',opts:['Rising','At its minimum','Falling','Equal to fixed cost per unit'],ans:2,exp:'New unit costs less than average (MC < ATC) so the average falls. ATC minimized where MC = ATC.',concept:'MC-ATC Relationship'},
+  {diff:'hard',industry:'Strategy',q:'Economies of scale mean long-run average cost:',opts:['Is constant across all output','Rises as output expands','Falls as output expands','Equals marginal cost at all outputs'],ans:2,exp:'Economies of scale: LRAC decreases as output expands. Sources: specialization, bulk input buying, technical efficiencies at larger scale.',concept:'Economies of Scale Definition'},
+  {diff:'medium',industry:'Operations',q:'Diseconomies of scale occur when:',opts:['LRAC falls with output','LRAC is constant with output','LRAC rises as firm grows','MC equals ATC'],ans:2,exp:'Diseconomies of scale: LRAC increases as firm becomes too large. Causes include coordination problems and managerial inefficiency.',concept:'Diseconomies of Scale'}
+],
+
+6:[
+  {diff:'easy',industry:'Agriculture',q:'Perfect competition requires:',opts:['Few large firms with pricing power','Many small buyers/sellers homogeneous product and free entry','One dominant firm','Government-set prices'],ans:1,exp:'Perfect competition: many small price-taking buyers/sellers, homogeneous product, perfect information, no transaction costs, free entry/exit.',concept:'Perfect Competition Conditions'},
+  {diff:'medium',industry:'Manufacturing',q:'Competitive firm maximizes profit where:',opts:['Total revenue is maximized','P equals ATC','P equals MC in the upward-sloping MC range','ATC is at its minimum'],ans:2,exp:'Competitive output rule: P = MR = MC in rising MC range. Marginal benefit (price) equals marginal cost.',concept:'Competitive Output Rule'},
+  {diff:'medium',industry:'Finance',q:'P=50 MAD, ATC=65 MAD, AVC=35 MAD. Short-run decision:',opts:['Shut down immediately','Continue operating — P covers variable costs','Raise price to cover ATC','Eliminate fixed costs first'],ans:1,exp:'Shutdown only if P < AVC. P(50) > AVC(35): operating covers variable costs and reduces the loss vs shutting down.',concept:'Short-Run Loss Minimization'},
+  {diff:'hard',industry:'Strategy',q:'In long-run perfectly competitive equilibrium firms earn:',opts:['Maximum economic profit','Zero economic profit only','Price above average cost','Losses equal to fixed costs'],ans:1,exp:'Free entry/exit drives economic profit to zero. Firms earn normal accounting profit covering all opportunity costs.',concept:'Long-Run Competitive Zero Profit'},
+  {diff:'easy',industry:'Luxury',q:'A monopolist faces a downward-sloping demand curve because:',opts:['It is a price taker','It is the sole seller and faces the entire market demand','It competes with many rivals','Government caps its price'],ans:1,exp:'As sole seller the monopolist must lower price to sell more. It faces the entire downward-sloping market demand curve.',concept:'Monopolist Demand Curve'},
+  {diff:'medium',industry:'Consulting',q:'For a monopolist MR is always:',opts:['Equal to price','Greater than price','Less than price','Equal to average revenue'],ans:2,exp:'Selling one more unit requires lowering price on all units sold. MR < P. Gap between P and MR reflects market power.',concept:'MR Less Than Price Monopoly'},
+  {diff:'medium',industry:'Marketing',q:'Monopolistic competition is characterized by:',opts:['Identical products and many firms','Differentiated products many firms and free entry','One dominant firm with barriers','Homogeneous products and barriers to entry'],ans:1,exp:'Monopolistic competition: many firms, differentiated products, free entry/exit. Each firm has some pricing power from product uniqueness.',concept:'Monopolistic Competition Features'},
+  {diff:'hard',industry:'Manufacturing',q:'Two-plant firm minimizes cost when:',opts:['Output split equally across plants','ATC equal across plants','MC equal across both plants','Total output is maximized'],ans:2,exp:'Equalize MC across plants. If MC1 > MC2, shift output to plant 2. Equalization minimizes total cost for given output.',concept:'Two-Plant Cost Minimization'},
+  {diff:'medium',industry:'Strategy',q:'Competitive firm shuts down in short run if:',opts:['P falls below ATC','P falls below AVC','TR is less than TC','Economic profit is negative'],ans:1,exp:'Shutdown if P < AVC. Below AVC revenue fails to cover even variable costs. Losing only fixed costs by shutting is better.',concept:'Shutdown Rule'},
+  {diff:'medium',industry:'Retail',q:'Monopolistically competitive firm earns short-run profit. Long-run result:',opts:['Profit persists due to product differentiation','New firms enter shifting demand left until profit equals zero','Government regulates profit','Prices rise to restore profit'],ans:1,exp:'Easy entry attracts rivals with substitute products. Each firm loses customers until economic profit = 0 long run.',concept:'Long-Run Monopolistic Competition'}
+],
+
+9:[
+  {diff:'easy',industry:'Strategy',q:'Oligopoly is characterized by:',opts:['Many small price-taking firms','A few large firms each significant relative to the industry','One dominant firm only','Government enterprises'],ans:1,exp:'Oligopoly: few firms each large relative to total industry (typically 2-10). Managers must consider rivals reactions to their decisions.',concept:'Oligopoly Definition'},
+  {diff:'medium',industry:'Manufacturing',q:'Sweezy oligopoly assumes rivals:',opts:['Always match both price increases and cuts','Match price cuts but ignore price increases','Always ignore all price changes','Exit when prices change'],ans:1,exp:'Sweezy: rivals match price cuts (to protect market share) but ignore increases (hoping to steal customers). Creates kinked demand curve.',concept:'Sweezy Oligopoly Assumption'},
+  {diff:'medium',industry:'Consulting',q:'The kinked demand curve leads to:',opts:['Constantly falling prices','Frequent price changes','Price stickiness even when costs shift moderately','Always maximizing output'],ans:2,exp:'Vertical MR gap: MC can shift up or down within this gap without changing the profit-maximizing price. Explains oligopoly price rigidity.',concept:'Sweezy Price Stickiness'},
+  {diff:'medium',industry:'Operations',q:'In Cournot oligopoly each firm chooses output assuming rivals:',opts:['Match all output changes','Hold their output constant','Set prices competitively','Follow the leader'],ans:1,exp:'Cournot: each firm takes rivals output as given when making own output decision. Generates reaction (best-response) functions.',concept:'Cournot Output Assumption'},
+  {diff:'medium',industry:'Finance',q:'Cournot-Nash equilibrium occurs when:',opts:['All firms charge identical prices','Neither firm wants to change output given the other firms output','Industry profit is maximized','One firm exits the market'],ans:1,exp:'Cournot-Nash: each firm on its reaction function simultaneously. No unilateral incentive to change output.',concept:'Cournot Nash Equilibrium'},
+  {diff:'hard',industry:'Strategy',q:'Stackelberg differs from Cournot because:',opts:['Both firms decide simultaneously','One firm (leader) moves first follower observes and responds','Firms always produce identical quantities','Government sets leader output'],ans:1,exp:'Stackelberg: sequential game. Leader commits first. Follower best-responds. Leader exploits first-mover advantage to earn more than in Cournot.',concept:'Stackelberg Sequential Game'},
+  {diff:'medium',industry:'Manufacturing',q:'Bertrand oligopoly with homogeneous products leads to:',opts:['Monopoly pricing','Cournot pricing','Price equal to MC — competitive outcome','Price above MC'],ans:2,exp:'Bertrand paradox: identical products so any firm above MC loses all customers. Nash equilibrium P = MC even with only two firms.',concept:'Bertrand Paradox'},
+  {diff:'medium',industry:'Marketing',q:'Cournot firms could earn more by colluding because collusion would:',opts:['Reduce total output further below Cournot level raising price','Lower prices for consumers','Eliminate all fixed costs','Make market entry easier'],ans:0,exp:'Monopoly/collusion: restrict output below Cournot to raise price and joint profit. But collusion is unstable since each firm has incentive to cheat.',concept:'Cournot Collusion Incentive'},
+  {diff:'easy',industry:'Consulting',q:'A contestable market means:',opts:['Many firms currently compete actively','Free entry and exit so even a monopolist faces competitive discipline','Government regulates entry strictly','Products must be identical'],ans:1,exp:'Contestability: threat of hit-and-run entry disciplines incumbent pricing. Costless entry and exit forces competitive behavior.',concept:'Contestable Markets'},
+  {diff:'medium',industry:'Finance',q:'Stackelberg leader earns more than a Cournot firm because:',opts:['Leader has lower production costs','First-mover commitment forces follower to produce less raising leader profit','Follower exits the market','Prices are higher for all firms'],ans:1,exp:'Leader commits to large output first. Follower best-responds with smaller output. Leader exploits this strategic advantage.',concept:'Stackelberg First Mover Advantage'}
+],
+
+10:[
+  {diff:'easy',industry:'Strategy',q:'A dominant strategy:',opts:['Wins only if opponent cooperates','Yields highest payoff regardless of what rival does','Requires observing rival move first','Is always the cooperative choice'],ans:1,exp:'Dominant strategy: best response no matter what the opponent chooses. Always play it if you have one.',concept:'Dominant Strategy'},
+  {diff:'medium',industry:'Consulting',q:'In the Prisoner Dilemma the Nash equilibrium is:',opts:['Both cooperate — best collective outcome','Both defect — individually rational but collectively worse','One defects one cooperates','Players alternate strategies'],ans:1,exp:'Both players have dominant strategy to defect. Nash = (Defect Defect) even though (Cooperate Cooperate) yields higher joint payoff.',concept:'Prisoner Dilemma Nash Equilibrium'},
+  {diff:'medium',industry:'Marketing',q:'In the advertising game both firms advertise even though both would prefer neither advertise. This is because:',opts:['Advertising always increases profit','Advertise is a dominant strategy for each firm — prisoner dilemma structure','Firms coordinate to maximize joint profits','Government requires advertising'],ans:1,exp:'Each firm dominant strategy: advertise regardless of rival. Nash = (Advertise Advertise) which may be worse for both than (Not Not).',concept:'Advertising Game Dominant Strategy'},
+  {diff:'medium',industry:'Manufacturing',q:'In the monitoring employees game there is:',opts:['One clear pure strategy Nash equilibrium','No pure strategy Nash equilibrium','A dominant strategy for the manager','A dominant strategy for the employee'],ans:1,exp:'Monitoring game: if manager always monitors employee always works; if employee always works manager stops monitoring. No stable pure Nash — only mixed strategy equilibrium.',concept:'Monitoring Game No Pure Nash'},
+  {diff:'hard',industry:'Finance',q:'A trigger strategy supports collusion in infinitely repeated games by:',opts:['Requiring government enforcement','Threatening permanent reversion to one-shot Nash if rival deviates','Paying rivals to cooperate','Setting prices in advance contractually'],ans:1,exp:'Trigger: cooperate while rival cooperates; if rival deviates revert to one-shot Nash equilibrium forever. Makes deviation unprofitable when firms are sufficiently patient.',concept:'Trigger Strategy Collusion'},
+  {diff:'easy',industry:'Operations',q:'A Nash equilibrium is:',opts:['The outcome that maximizes all players payoffs','A set of strategies where no player can improve payoff by unilaterally changing strategy','Always achieved through cooperation','Always unique in every game'],ans:1,exp:'Nash equilibrium: each player strategy is best response to others. Stable because no individual has incentive to deviate unilaterally.',concept:'Nash Equilibrium Definition'},
+  {diff:'medium',industry:'Strategy',q:'A coordination game typically has:',opts:['Exactly one Nash equilibrium','No Nash equilibrium','Multiple Nash equilibria','A dominant strategy for all players'],ans:2,exp:'Coordination games: multiple Nash equilibria exist (both choose same option). Challenge is coordinating on the same equilibrium.',concept:'Coordination Game Multiple Equilibria'},
+  {diff:'medium',industry:'Consulting',q:'A secure strategy (maximin) is appropriate when:',opts:['A dominant strategy already exists','No dominant strategy exists and player maximizes worst-case payoff','Players can communicate freely','The game is cooperative'],ans:1,exp:'Maximin: when no dominant strategy guarantee best outcome in worst case. Conservative choice under rival uncertainty.',concept:'Secure Strategy Maximin'},
+  {diff:'easy',industry:'Marketing',q:'A one-shot game differs from a repeated game because:',opts:['Players interact only once with no future consequences','Players always cooperate in one-shot games','Dominant strategies never exist in one-shot games','Payoffs are always equal'],ans:0,exp:'One-shot: single interaction no future relationship. Makes cooperation hard since there is no threat of future punishment for deviation.',concept:'One-Shot vs Repeated Games'},
+  {diff:'hard',industry:'Finance',q:'Collusion is more sustainable in repeated games when:',opts:['Interest rate is very high','Game has a known near final period','Interaction is indefinite and interest rate is low','Firms have very different costs'],ans:2,exp:'Low interest rate: future profits more valuable today. Indefinite interaction: no end-of-period unraveling. Both conditions make cooperative trigger strategies credible.',concept:'Collusion Sustainability Conditions'}
 ]
+
 };
 
 const TF = {
@@ -460,14 +555,80 @@ const TF = {
    exp:'TRUE. Unit elasticity (E=−1) = MR=0 = maximum total revenue. Any price change in either direction will reduce TR.',concept:'Unit Elasticity & Revenue Maximum'},
   {diff:'easy',industry:'📣 Marketing',q:'The more substitutes a product has, the more inelastic its demand.',ans:false,
    exp:'FALSE. More substitutes = MORE elastic demand. Consumers can easily switch, making them highly price-sensitive.',concept:'Substitutes & Elasticity'},
+],
+
+4:[
+  {diff:'easy',industry:'Retail',q:'A consumer maximizes utility by spending all income on the cheapest available goods.',ans:false,exp:'FALSE. Utility maximized by equating MU/P across all goods not by buying cheapest. Equimarginal principle.',concept:'Consumer Equilibrium'},
+  {diff:'easy',industry:'Management',q:'Indifference curves further from the origin represent higher levels of utility.',ans:true,exp:'TRUE. Monotonicity: more is better. Bundles further from origin have more of both goods yielding higher utility.',concept:'IC and Utility Levels'},
+  {diff:'medium',industry:'Finance',q:'When income increases the budget line shifts outward parallel to the original.',ans:true,exp:'TRUE. Income change shifts entire budget line outward (rise) or inward (fall). Slope unchanged since prices constant.',concept:'Budget Line Income Change'},
+  {diff:'medium',industry:'Consumer',q:'The substitution effect of a price decrease leads to less consumption of that good.',ans:false,exp:'FALSE. Substitution effect of price DECREASE leads to MORE consumption of that good since it became relatively cheaper.',concept:'Substitution Effect Direction'},
+  {diff:'hard',industry:'Consulting',q:'For a normal good the income and substitution effects of a price decrease both increase quantity demanded.',ans:true,exp:'TRUE. Normal good: sub effect (cheaper good) and income effect (richer consumer) both work in same direction increasing quantity.',concept:'Normal Good Price Effects'},
+  {diff:'easy',industry:'Education',q:'Indifference curves can intersect each other.',ans:false,exp:'FALSE. Crossing ICs imply same bundle gives two utility levels. Logical contradiction.',concept:'IC Cannot Intersect'},
+  {diff:'medium',industry:'Strategy',q:'Consumer equilibrium is where the budget line is tangent to the highest attainable indifference curve.',ans:true,exp:'TRUE. Tangency: MRS = Px/Py. Consumer reaches maximum possible utility given budget constraint at this point.',concept:'Consumer Equilibrium Tangency'},
+  {diff:'medium',industry:'Real Estate',q:'When the price of Good X falls the X-intercept of the budget line increases.',ans:true,exp:'TRUE. X-intercept = M/Px. When Px falls M/Px rises so X-intercept moves outward. Y-intercept unchanged.',concept:'Budget Line X-Intercept'},
+  {diff:'hard',industry:'Finance',q:'For an inferior good the income and substitution effects of a price decrease work in opposite directions.',ans:true,exp:'TRUE. Sub effect increases consumption (good cheaper). Income effect decreases it (higher real income means less of inferior good). They oppose.',concept:'Inferior Good Effects Opposing'},
+  {diff:'medium',industry:'Operations',q:'The market rate of substitution equals the negative of the price ratio (-Px/Py).',ans:true,exp:'TRUE. Slope of budget line = -Px/Py = market rate at which one good can be exchanged for another at market prices.',concept:'Market Rate of Substitution'}
+],
+
+5:[
+  {diff:'easy',industry:'Manufacturing',q:'In the long run all costs are variable.',ans:true,exp:'TRUE. Long run: all inputs adjustable including capital. No fixed inputs and therefore no fixed costs.',concept:'Long Run All Variable'},
+  {diff:'easy',industry:'Operations',q:'Marginal product of labor eventually decreases due to the law of diminishing returns.',ans:true,exp:'TRUE. Adding variable input to fixed input eventually yields less additional output per unit. Diminishing marginal returns.',concept:'Diminishing Returns'},
+  {diff:'medium',industry:'Strategy',q:'When MC is below ATC the average total cost is rising.',ans:false,exp:'FALSE. When MC < ATC the ATC is FALLING. New unit costs less than average pulling it down. ATC rises only when MC > ATC.',concept:'MC-ATC Relationship'},
+  {diff:'medium',industry:'Consulting',q:'Fixed costs affect the short-run output decision.',ans:false,exp:'FALSE. Fixed costs are sunk in short run. Only variable/marginal costs affect output decision.',concept:'Fixed Costs Irrelevant to Output'},
+  {diff:'easy',industry:'Construction',q:'Economies of scale occur when LRAC falls as output expands.',ans:true,exp:'TRUE. Economies of scale: LRAC decreases as output grows. Sources: specialization, bulk inputs, technical efficiency.',concept:'Economies of Scale'},
+  {diff:'medium',industry:'Finance',q:'Average fixed cost decreases as output increases.',ans:true,exp:'TRUE. AFC = FC/Q. As Q rises same fixed cost spread over more units so AFC always falls.',concept:'Average Fixed Cost Behavior'},
+  {diff:'easy',industry:'Manufacturing',q:'An isoquant slopes downward because reducing capital requires more labor to maintain the same output.',ans:true,exp:'TRUE. Along isoquant: less K requires more L to keep output constant. Creates the negative slope.',concept:'Isoquant Negative Slope'},
+  {diff:'medium',industry:'HR',q:'Profit-maximizing firm should hire labor until VMPL equals the wage.',ans:true,exp:'TRUE. VMPL = P x MPL. Hiring rule: VMPL = w. If VMPL > w hire more; if VMPL < w reduce labor.',concept:'Optimal Hiring Rule'},
+  {diff:'medium',industry:'Finance',q:'Sunk costs should influence a managers future decisions.',ans:false,exp:'FALSE. Sunk costs already paid and unrecoverable. Rational managers ignore them and focus on future marginal costs and benefits.',concept:'Sunk Costs Irrelevance'},
+  {diff:'hard',industry:'Strategy',q:'Diseconomies of scale occur only because managers become less effective as firm size grows.',ans:false,exp:'FALSE. Also from coordination problems, input scarcity at large scale, and bureaucratic inefficiencies. Management is just one source.',concept:'Diseconomies of Scale Causes'}
+],
+
+6:[
+  {diff:'easy',industry:'Agriculture',q:'A perfectly competitive firm is a price taker.',ans:true,exp:'TRUE. Too small relative to market to influence price. Faces horizontal demand curve at the market price.',concept:'Price Taker Perfect Competition'},
+  {diff:'medium',industry:'Manufacturing',q:'A competitive firm should shut down in the short run if price falls below ATC.',ans:false,exp:'FALSE. Shutdown if P < AVC not ATC. If P covers variable costs operating reduces loss better than shutting down.',concept:'Shutdown Rule'},
+  {diff:'easy',industry:'Strategy',q:'In long-run competitive equilibrium economic profit equals zero.',ans:true,exp:'TRUE. Free entry/exit drives economic profit to zero. Firms earn only normal accounting profit covering all opportunity costs.',concept:'Long-Run Zero Economic Profit'},
+  {diff:'medium',industry:'Luxury',q:'A monopolist can charge any price it wants and still maximize profit.',ans:false,exp:'FALSE. Monopolist constrained by demand curve. To sell more must lower price. Profit maximized at MR = MC not at highest possible price.',concept:'Monopolist Demand Constraint'},
+  {diff:'medium',industry:'Marketing',q:'In monopolistic competition long-run economic profit equals zero.',ans:true,exp:'TRUE. Free entry attracts rivals with substitutes reducing each firm demand until economic profit = 0. Same end result as perfect competition.',concept:'Long-Run Monopolistic Competition Profit'},
+  {diff:'hard',industry:'Manufacturing',q:'Supply curves exist for monopolist firms just like for competitive firms.',ans:false,exp:'FALSE. Supply curve requires one-to-one price-quantity relationship. Monopolist chooses Q based on MR = MC. Any price could match any Q depending on demand. No supply curve.',concept:'No Supply Curve for Monopoly'},
+  {diff:'easy',industry:'Education',q:'Product differentiation gives a monopolistically competitive firm some pricing power.',ans:true,exp:'TRUE. Unique products mean consumer preferences. Firm faces downward-sloping demand and can raise price without losing all customers.',concept:'Monopolistic Competition Pricing Power'},
+  {diff:'hard',industry:'Construction',q:'A two-plant firm minimizes cost when average costs are equal across plants.',ans:false,exp:'FALSE. Cost minimized when MARGINAL costs equal across plants. Equalizing ATC does not minimize total cost.',concept:'Two-Plant MC Equalization'},
+  {diff:'medium',industry:'Finance',q:'For a monopolist MR is always less than price.',ans:true,exp:'TRUE. Selling one more unit requires lowering price on all units. MR = P + Q(dP/dQ) < P since dP/dQ < 0.',concept:'MR Less Than Price Monopoly'},
+  {diff:'medium',industry:'Retail',q:'In perfect competition P = MC in long-run equilibrium which is considered allocatively efficient.',ans:true,exp:'TRUE. P = MC: consumers pay exactly what last unit costs to produce. No deadweight loss. Benchmark of economic efficiency.',concept:'Allocative Efficiency Perfect Competition'}
+],
+
+9:[
+  {diff:'easy',industry:'Manufacturing',q:'In Cournot oligopoly each firm assumes rivals hold their OUTPUT constant when it changes output.',ans:true,exp:'TRUE. Cournot assumption: take rivals output as given when deciding own output. This generates reaction functions.',concept:'Cournot Output Assumption'},
+  {diff:'medium',industry:'Strategy',q:'The Sweezy model predicts that oligopoly prices are highly flexible and change frequently with costs.',ans:false,exp:'FALSE. Kinked demand creates vertical MR gap. MC can shift within the gap without changing price. Explains price stickiness.',concept:'Sweezy Price Stickiness'},
+  {diff:'medium',industry:'Consulting',q:'Stackelberg leader earns more profit than it would in Cournot.',ans:true,exp:'TRUE. First-mover advantage: leader commits to large output forcing follower to reduce output. Leader earns more than in Cournot.',concept:'Stackelberg First Mover Advantage'},
+  {diff:'easy',industry:'Finance',q:'Bertrand oligopoly with homogeneous products drives price to marginal cost.',ans:true,exp:'TRUE. Price war: any firm above MC loses all customers. Nash equilibrium has both firms pricing at MC. Bertrand paradox.',concept:'Bertrand Paradox'},
+  {diff:'medium',industry:'Manufacturing',q:'In Cournot equilibrium total industry output is higher than monopoly output.',ans:true,exp:'TRUE. Cournot output lies between monopoly (lowest Q) and perfect competition (highest Q). More Cournot firms push output higher.',concept:'Cournot Output vs Monopoly'},
+  {diff:'easy',industry:'Marketing',q:'Sweezy firm believes rivals match price cuts but ignore price increases.',ans:true,exp:'TRUE. Asymmetric belief creates kinked demand: elastic above current price (rivals ignore increases) inelastic below (rivals match cuts).',concept:'Sweezy Beliefs Kinked Demand'},
+  {diff:'medium',industry:'Strategy',q:'Contestable market may have few active firms yet still produce competitive outcomes.',ans:true,exp:'TRUE. Contestability is about threat of entry not number of active firms. Free entry/exit disciplines even a monopolist to price competitively.',concept:'Contestable Markets Competitive Outcome'},
+  {diff:'hard',industry:'Consulting',q:'Stackelberg follower earns the same profit as in Cournot equilibrium.',ans:false,exp:'FALSE. Stackelberg follower earns LESS than Cournot. Leader large output commitment squeezes follower profitable output range.',concept:'Stackelberg vs Cournot Profits'},
+  {diff:'medium',industry:'Manufacturing',q:'Bertrand competition with differentiated products results in price above marginal cost.',ans:true,exp:'TRUE. With differentiated products consumers have preferences and do not switch entirely on price. Firms retain customers and P > MC.',concept:'Bertrand Differentiated Products'},
+  {diff:'medium',industry:'Finance',q:'In oligopoly each firms demand depends on rivals actions making it the most challenging market structure to manage.',ans:true,exp:'TRUE. Strategic interdependence: each firm optimal decision depends on what rivals do. Must anticipate and respond to rival reactions.',concept:'Oligopoly Strategic Interdependence'}
+],
+
+10:[
+  {diff:'easy',industry:'Strategy',q:'A player with a dominant strategy should always play it regardless of the rival action.',ans:true,exp:'TRUE. Dominant strategy yields highest payoff no matter what opponent does. No need to predict rival.',concept:'Dominant Strategy Always Play'},
+  {diff:'medium',industry:'Consulting',q:'The Nash equilibrium in the Prisoner Dilemma maximizes joint payoffs.',ans:false,exp:'FALSE. Nash (both defect) is individually rational but collectively suboptimal. Both cooperating yields higher joint payoffs.',concept:'Prisoner Dilemma Collectively Suboptimal'},
+  {diff:'medium',industry:'Marketing',q:'Trigger strategies can support collusion in infinitely repeated games without explicit communication.',ans:true,exp:'TRUE. Self-enforcing: threat of future punishment deters deviation. No explicit agreement needed if interest rate is low enough.',concept:'Trigger Strategy Self-Enforcing'},
+  {diff:'easy',industry:'Finance',q:'A Nash equilibrium guarantees the best possible outcome for all players.',ans:false,exp:'FALSE. Nash is stable (no incentive to deviate) but not necessarily optimal. Prisoner Dilemma Nash leaves both players worse off.',concept:'Nash Not Always Optimal'},
+  {diff:'medium',industry:'Strategy',q:'Simultaneous-move games are represented using the normal (matrix) form.',ans:true,exp:'TRUE. Normal form matrix shows all players strategies and payoffs for all strategy combinations. Perfect for simultaneous decisions.',concept:'Normal Form Simultaneous Games'},
+  {diff:'medium',industry:'Operations',q:'A coordination game has exactly one Nash equilibrium.',ans:false,exp:'FALSE. Coordination games typically have multiple Nash equilibria (e.g. both drive right OR both drive left). Challenge is coordinating on same one.',concept:'Coordination Game Multiple Nash'},
+  {diff:'easy',industry:'Manufacturing',q:'In a one-shot game players have no incentive to cooperate since there is no future punishment.',ans:true,exp:'TRUE. One-shot: no future relationship. Cooperation requires future threats to be credible. Without future there is no enforcement mechanism.',concept:'One-Shot Game No Cooperation'},
+  {diff:'medium',industry:'Consulting',q:'Collusion is harder to sustain when the interest rate is high.',ans:true,exp:'TRUE. High interest rate: future profits worth less today. Short-term gain from deviating becomes relatively more attractive vs future punishment.',concept:'Collusion and Interest Rate'},
+  {diff:'medium',industry:'Marketing',q:'A secure strategy maximizes the players minimum possible payoff.',ans:true,exp:'TRUE. Secure (maximin) strategy: guarantee best outcome in worst case. Conservative choice when there is no dominant strategy.',concept:'Secure Strategy Maximin'},
+  {diff:'hard',industry:'Finance',q:'In an infinitely repeated game collusion may be sustained as a Nash equilibrium using trigger strategies.',ans:true,exp:'TRUE. If players patient enough (low interest rate) trigger strategy makes cooperation self-enforcing Nash equilibrium. Future punishment deters deviation.',concept:'Collusion as Nash Infinitely Repeated'}
 ]
+
 };
 
 // ── STATE ──────────────────────────────────────────────────
 let ch=0, mode='mcq', qIdx=0, score=0, correct=0, streak=0;
 let mcqList=[], tfList=[], answered=false;
-const chNames={1:'Chapter 1 — Fundamentals',2:'Chapter 2 — Supply & Demand',3:'Chapter 3 — Elasticity'};
-const chClass={1:'ch1',2:'ch2',3:'ch3'};
+const chNames={1:'Chapter 1 — Fundamentals',2:'Chapter 2 — Supply & Demand',3:'Chapter 3 — Elasticity',4:'Chapter 4 — Individual Behavior',5:'Chapter 5 — Production & Costs',6:'Chapter 6 — Competitive Markets',9:'Chapter 9 — Oligopoly Models',10:'Chapter 10 — Game Theory'};
+const chClass={1:'ch1',2:'ch2',3:'ch3',4:'ch4',5:'ch5',6:'ch6',9:'ch9',10:'ch10'};
 
 // ── LOCK ────────────────────────────────────────────────────
 let selectedCh = 0;
@@ -601,7 +762,7 @@ function answerTF(val){
     else if((isT&&val&&!q.ans)||(!isT&&!val&&q.ans))b.classList.add('wrong');
   });
   showFeedback(ok,q);
-}f
+}
 
 function nextQ(){
   qIdx++;
