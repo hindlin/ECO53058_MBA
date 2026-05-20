@@ -7,108 +7,87 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#f0f4f8;--surface:#ffffff;--surface2:#e8eef5;--border:#d0d9e8;
-  --accent:#2563eb;--accent2:#7c3aed;--text:#1a2035;--muted:#64748b;
-  --success:#16a34a;--danger:#dc2626;--warning:#d97706;
-  --font:'Sora',sans-serif;--mono:'JetBrains Mono',monospace;
-}
+:root{--bg:#f0f4f8;--surface:#ffffff;--surface2:#e8eef5;--border:#d0d9e8;--accent:#2563eb;--text:#1a2035;--muted:#64748b;--success:#16a34a;--danger:#dc2626;--font:'Sora',sans-serif;--mono:'JetBrains Mono',monospace}
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--font)}
 body{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:16px}
-
-/* LOGIN */
 #loginScreen{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;gap:24px}
 .logo-mark{font-size:36px;font-weight:600;letter-spacing:-1px}
 .logo-mark span{color:var(--accent)}
 .logo-sub{font-size:12px;color:var(--muted);text-align:center;line-height:1.6}
 .login-card{width:100%;background:var(--surface);border:0.5px solid var(--border);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px}
 .login-card label{font-size:11px;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase;display:block;margin-bottom:5px}
-.login-card input{width:100%;background:var(--surface2);border:0.5px solid var(--border);border-radius:8px;padding:10px 14px;font-size:14px;font-family:var(--font);color:var(--text);outline:none;transition:border 0.2s}
+.login-card input{width:100%;background:var(--surface2);border:0.5px solid var(--border);border-radius:8px;padding:10px 14px;font-size:14px;font-family:var(--font);color:var(--text);outline:none}
 .login-card input:focus{border-color:var(--accent)}
-.btn-main{width:100%;padding:11px;border:none;border-radius:8px;background:var(--accent);color:#fff;font-size:14px;font-family:var(--font);font-weight:500;cursor:pointer;transition:opacity 0.2s}
-.btn-main:hover{opacity:0.88}
+.btn-main{width:100%;padding:11px;border:none;border-radius:8px;background:var(--accent);color:#fff;font-size:14px;font-family:var(--font);font-weight:500;cursor:pointer}
 .switch-link{text-align:center;font-size:12px;color:var(--muted);cursor:pointer}
 .switch-link span{color:var(--accent);text-decoration:underline}
 .err{font-size:12px;color:var(--danger);display:none}
-
-/* APP */
-#appScreen{display:none;width:100%;max-width:720px;height:92vh;max-height:700px;background:var(--surface);border:0.5px solid var(--border);border-radius:20px;overflow:hidden;flex-direction:column}
+#appScreen{display:none;width:100%;max-width:720px;height:92vh;max-height:720px;background:var(--surface);border:0.5px solid var(--border);border-radius:20px;overflow:hidden;flex-direction:column}
 #appScreen.on{display:flex}
-
-/* HEADER */
 .app-header{padding:12px 18px;border-bottom:0.5px solid var(--border);background:var(--surface2);display:flex;align-items:center;gap:12px}
 .hlogo{font-size:16px;font-weight:600;letter-spacing:-0.3px}
 .hlogo span{color:var(--accent)}
 .hsub{font-size:11px;color:var(--muted)}
-.hbadge{font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(79,143,255,0.15);color:var(--accent);border:0.5px solid rgba(79,143,255,0.3);margin-left:6px}
+.hbadge{font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(37,99,235,0.12);color:var(--accent);border:0.5px solid rgba(37,99,235,0.25);margin-left:6px}
 .student-pill{margin-left:auto;font-size:11px;padding:3px 10px;border-radius:20px;background:var(--surface);border:0.5px solid var(--border);color:var(--muted)}
-
-/* TABS */
 .tabs{display:flex;border-bottom:0.5px solid var(--border);background:var(--surface2)}
-.tab{flex:1;padding:9px;font-size:12px;font-family:var(--font);border:none;background:transparent;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s}
+.tab{flex:1;padding:9px;font-size:12px;font-family:var(--font);border:none;background:transparent;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent}
 .tab.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:500}
-
-/* PANELS */
 .panel{display:none;flex-direction:column;flex:1;overflow:hidden}
 .panel.on{display:flex}
-
-/* CHAT */
 .messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
 .messages::-webkit-scrollbar{width:4px}
-.messages::-webkit-scrollbar-track{background:transparent}
 .messages::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
 .msg{display:flex;gap:8px;max-width:90%}
 .msg.user{align-self:flex-end;flex-direction:row-reverse}
 .bubble{padding:10px 14px;border-radius:14px;font-size:13.5px;line-height:1.7}
 .msg.bot .bubble{background:var(--surface2);color:var(--text);border-bottom-left-radius:4px}
 .msg.user .bubble{background:var(--accent);color:#fff;border-bottom-right-radius:4px}
-.ico{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:14px}
-.msg.bot .ico{background:rgba(79,143,255,0.15);color:var(--accent)}
-.msg.user .ico{background:var(--surface2);color:var(--muted)}
+.ico{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:14px;background:rgba(37,99,235,0.1)}
 .typing{display:flex;gap:4px;align-items:center;padding:10px 14px}
 .typing span{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:blink 1.2s infinite}
 .typing span:nth-child(2){animation-delay:.2s}
 .typing span:nth-child(3){animation-delay:.4s}
 @keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
 .chips{display:flex;flex-wrap:wrap;gap:5px;padding:8px 14px;border-top:0.5px solid var(--border);background:var(--surface2)}
-.chip{font-size:11px;padding:3px 10px;border-radius:20px;border:0.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all 0.2s}
-.chip:hover{background:rgba(79,143,255,0.15);color:var(--accent);border-color:rgba(79,143,255,0.3)}
+.chip{font-size:11px;padding:3px 10px;border-radius:20px;border:0.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer}
+.chip:hover{background:rgba(37,99,235,0.1);color:var(--accent)}
 .input-row{padding:10px 14px;border-top:0.5px solid var(--border);display:flex;gap:8px;background:var(--surface2)}
-.input-row textarea{flex:1;resize:none;background:var(--surface);border:0.5px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;font-family:var(--font);color:var(--text);outline:none;height:38px;max-height:80px;overflow-y:auto;line-height:1.5;transition:border 0.2s}
+.input-row textarea{flex:1;resize:none;background:var(--surface);border:0.5px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;font-family:var(--font);color:var(--text);outline:none;height:38px;max-height:80px;line-height:1.5}
 .input-row textarea:focus{border-color:var(--accent)}
-.send-btn{width:38px;height:38px;border-radius:8px;border:none;background:var(--accent);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;transition:opacity 0.2s}
-.send-btn:hover{opacity:0.85}
-
-/* QUIZ */
+.send-btn{width:38px;height:38px;border-radius:8px;border:none;background:var(--accent);color:#fff;cursor:pointer;font-size:16px;flex-shrink:0}
 .quiz-scroll{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
-.quiz-scroll::-webkit-scrollbar{width:4px}
-.quiz-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
-.qtop{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.qtop h3{font-size:13px;font-weight:500;color:var(--text)}
-.cpills{display:flex;flex-wrap:wrap;gap:5px}
-.cpill{font-size:11px;padding:3px 10px;border-radius:20px;border:0.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all 0.2s}
-.cpill.on{background:rgba(79,143,255,0.15);color:var(--accent);border-color:rgba(79,143,255,0.3);font-weight:500}
+.qtop h3{font-size:13px;font-weight:500;color:var(--text);margin-bottom:8px}
+.quiz-type-tabs{display:flex;gap:6px;margin-bottom:8px}
+.qtype-tab{font-size:11px;padding:4px 12px;border-radius:20px;border:0.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;font-family:var(--font)}
+.qtype-tab.on{background:var(--accent);color:#fff;border-color:transparent}
+.cpills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.cpill{font-size:11px;padding:3px 10px;border-radius:20px;border:0.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer}
+.cpill.on{background:rgba(37,99,235,0.12);color:var(--accent);border-color:rgba(37,99,235,0.3);font-weight:500}
+.score-strip{background:rgba(37,99,235,0.08);border:0.5px solid rgba(37,99,235,0.2);border-radius:8px;padding:8px 14px;font-size:12px;color:var(--accent);display:none;flex-wrap:wrap;gap:12px;margin-bottom:4px}
 .qcard{background:var(--surface2);border:0.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:8px}
 .qtag{font-size:10px;font-weight:500;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
 .qtext{font-size:13px;color:var(--text);line-height:1.7;margin-bottom:12px}
+.mcq-opts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.mcq-opt{padding:8px 12px;border-radius:8px;border:0.5px solid var(--border);background:var(--surface);font-size:13px;color:var(--text);cursor:pointer;text-align:left;font-family:var(--font)}
+.mcq-opt:hover:not(:disabled){border-color:var(--accent);background:rgba(37,99,235,0.05)}
+.mcq-opt.correct{background:rgba(22,163,74,0.1);border-color:var(--success);color:var(--success)}
+.mcq-opt.wrong{background:rgba(220,38,38,0.1);border-color:var(--danger);color:var(--danger)}
+.mcq-feedback{font-size:12.5px;padding:8px 12px;border-radius:8px;margin-bottom:10px;display:none;line-height:1.6}
+.mcq-feedback.show{display:block}
+.mcq-feedback.ok{background:rgba(22,163,74,0.1);color:var(--success);border:0.5px solid rgba(22,163,74,0.3)}
+.mcq-feedback.no{background:rgba(220,38,38,0.08);color:var(--danger);border:0.5px solid rgba(220,38,38,0.2)}
 .qbtns{display:flex;gap:7px}
-.qbtns button{font-size:11.5px;padding:5px 12px;border-radius:7px;border:0.5px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-family:var(--font);transition:all 0.2s}
-.qbtns button:hover{border-color:var(--accent);color:var(--accent)}
+.qbtns button{font-size:11.5px;padding:5px 12px;border-radius:7px;border:0.5px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-family:var(--font)}
 .qbtns button.pri{background:var(--accent);color:#fff;border-color:transparent}
-.qbtns button.pri:hover{opacity:0.85}
-.ans-box{margin-top:10px;padding:11px 13px;background:var(--surface);border-radius:8px;border:0.5px solid rgba(61,214,140,0.3);font-size:12.5px;color:var(--text);line-height:1.7;display:none}
+.ans-box{margin-top:10px;padding:11px 13px;background:var(--surface);border-radius:8px;border:0.5px solid rgba(22,163,74,0.35);font-size:12.5px;color:var(--text);line-height:1.7;display:none}
 .ans-box.show{display:block}
-
-/* DASHBOARD */
-#dashScreen{display:none;width:100%;max-width:720px;height:92vh;max-height:700px;background:var(--surface);border:0.5px solid var(--border);border-radius:20px;overflow:hidden;flex-direction:column}
+#dashScreen{display:none;width:100%;max-width:720px;height:92vh;max-height:720px;background:var(--surface);border:0.5px solid var(--border);border-radius:20px;overflow:hidden;flex-direction:column}
 #dashScreen.on{display:flex}
 .dash-header{padding:12px 18px;border-bottom:0.5px solid var(--border);background:var(--surface2);display:flex;align-items:center;gap:10px}
 .dash-header h2{font-size:15px;font-weight:500;color:var(--text)}
-.logout-btn{margin-left:auto;font-size:12px;color:var(--muted);cursor:pointer;padding:4px 10px;border:0.5px solid var(--border);border-radius:7px;background:transparent;font-family:var(--font);transition:all 0.2s}
-.logout-btn:hover{border-color:var(--accent);color:var(--accent)}
+.logout-btn{margin-left:auto;font-size:12px;color:var(--muted);cursor:pointer;padding:4px 10px;border:0.5px solid var(--border);border-radius:7px;background:transparent;font-family:var(--font)}
 .dash-scroll{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px}
-.dash-scroll::-webkit-scrollbar{width:4px}
-.dash-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
 .stat-card{background:var(--surface2);border-radius:10px;padding:14px 16px}
 .slabel{font-size:11px;color:var(--muted);margin-bottom:5px}
@@ -119,25 +98,21 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
 .bar-row{display:flex;align-items:center;gap:10px}
 .bar-label{font-size:12px;color:var(--muted);width:75px;flex-shrink:0}
 .bar-track{flex:1;height:8px;background:var(--surface2);border-radius:4px;overflow:hidden}
-.bar-fill{height:100%;background:var(--accent);border-radius:4px;transition:width 0.6s ease}
-.bar-count{font-size:11px;color:var(--muted);width:22px;text-align:right;font-family:var(--mono)}
+.bar-fill{height:100%;background:var(--accent);border-radius:4px}
+.bar-count{font-size:11px;color:var(--muted);width:22px;text-align:right}
 .table-wrap{border:0.5px solid var(--border);border-radius:12px;overflow:hidden}
 table{width:100%;border-collapse:collapse;font-size:12.5px}
 thead{background:var(--surface2)}
 th{padding:9px 13px;text-align:left;color:var(--muted);font-weight:500;border-bottom:0.5px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:0.4px}
 td{padding:9px 13px;color:var(--text);border-bottom:0.5px solid var(--border)}
 tr:last-child td{border-bottom:none}
-tr:hover td{background:var(--surface2)}
-.ch-badge{font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(79,143,255,0.15);color:var(--accent);font-weight:500}
+.ch-badge{font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(37,99,235,0.12);color:var(--accent);font-weight:500}
 .empty{text-align:center;padding:40px;color:var(--muted);font-size:13px}
-.refresh-btn{font-size:12px;padding:5px 12px;border-radius:7px;border:0.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:6px;transition:all 0.2s}
-.refresh-btn:hover{border-color:var(--accent);color:var(--accent)}
 .row-between{display:flex;align-items:center;justify-content:space-between}
+.refresh-btn{font-size:12px;padding:5px 12px;border-radius:7px;border:0.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;font-family:var(--font)}
 </style>
 </head>
 <body>
-
-<!-- LOGIN -->
 <div id="loginScreen">
   <div class="logo-mark"><span>Hindo</span>nomics</div>
   <div class="logo-sub">ECO5305 · Advanced Managerial Economics<br>Dr. Hind Lebdaoui</div>
@@ -155,8 +130,6 @@ tr:hover td{background:var(--surface2)}
     <div class="switch-link" onclick="showStudent()"><span>← Back to student login</span></div>
   </div>
 </div>
-
-<!-- APP -->
 <div id="appScreen">
   <div class="app-header">
     <div>
@@ -171,7 +144,7 @@ tr:hover td{background:var(--surface2)}
   </div>
   <div class="panel on" id="chatPanel">
     <div class="messages" id="messages">
-      <div class="msg bot"><div class="ico">🎓</div><div class="bubble">Welcome to <strong>Hindonomics</strong>! 👋 I'm your ECO5305 tutor. I'll walk you through concepts step by step, then check your understanding before we move on. What would you like to study today?</div></div>
+      <div class="msg bot"><div class="ico">🎓</div><div class="bubble">Welcome to <strong>Hindonomics</strong>! 👋 I am your ECO5305 tutor. I will walk you through concepts step by step and check your understanding. What would you like to study today?</div></div>
     </div>
     <div class="chips">
       <span class="chip" onclick="qa('Explain the six principles of effective management')">Ch.1 · Six principles</span>
@@ -183,12 +156,16 @@ tr:hover td{background:var(--surface2)}
     </div>
     <div class="input-row">
       <textarea id="uInput" placeholder="Ask anything about ECO5305..." rows="1" onkeydown="hk(event)"></textarea>
-      <button class="send-btn" onclick="sendMsg()" title="Send">➤</button>
+      <button class="send-btn" onclick="sendMsg()">&#10148;</button>
     </div>
   </div>
   <div class="panel" id="quizPanel">
     <div class="quiz-scroll">
       <div class="qtop"><h3>📝 Scan it. Answer it. Try not to Google it 😄</h3></div>
+      <div class="quiz-type-tabs">
+        <button class="qtype-tab on" onclick="setQType('mcq',this)">MCQ</button>
+        <button class="qtype-tab" onclick="setQType('open',this)">Open-ended</button>
+      </div>
       <div class="cpills" id="cpills">
         <span class="cpill on" onclick="fq('all',this)">All</span>
         <span class="cpill" onclick="fq('1',this)">Ch.1</span>
@@ -196,13 +173,18 @@ tr:hover td{background:var(--surface2)}
         <span class="cpill" onclick="fq('3',this)">Ch.3</span>
         <span class="cpill" onclick="fq('4',this)">Ch.4</span>
         <span class="cpill" onclick="fq('5',this)">Ch.5</span>
+        <span class="cpill" onclick="fq('exam',this)">Exam style</span>
+      </div>
+      <div class="score-strip" id="scoreStrip">
+        <span>✅ Correct: <strong id="scCorrect">0</strong></span>
+        <span>❌ Wrong: <strong id="scWrong">0</strong></span>
+        <span>📊 Score: <strong id="scPct">0%</strong></span>
+        <span style="margin-left:auto;cursor:pointer;text-decoration:underline" onclick="resetScore()">Reset</span>
       </div>
       <div id="qlist"></div>
     </div>
   </div>
 </div>
-
-<!-- DASHBOARD -->
 <div id="dashScreen">
   <div class="dash-header">
     <span style="font-size:18px">📊</span>
@@ -211,181 +193,248 @@ tr:hover td{background:var(--surface2)}
   </div>
   <div class="dash-scroll" id="dashContent"><div class="empty">Loading…</div></div>
 </div>
-
 <script>
 const TEACHER_PASS='hind2025';
-const SUPABASE_URL='https://mcp.supabase.com/mcp';
-let student=null,sessionId=null,history=[],qf='all',revealed={};
+const API='/api/chat';
+let student=null,sessionId=null,chatHistory=[],qf='all',qtype='mcq',revealed={},answered={},scoreCorrect=0,scoreWrong=0;
 
-const QS=[
-  {ch:'1',tag:'Ch.1 · Time Value of Money',q:'What is the maximum amount you would pay for an asset that generates $250,000 at the end of each of five years if the opportunity cost is 8%?',a:'PV = 250,000/1.08 + 250,000/1.08² + 250,000/1.08³ + 250,000/1.08⁴ + 250,000/1.08⁵ ≈ $998,175'},
-  {ch:'1',tag:'Ch.1 · Marginal Analysis',q:"A firm's total benefit is TB = 100Q − 2Q² and total cost is TC = 5Q. What is the profit-maximizing output Q?",a:'MB = 100 − 4Q, MC = 5. Set MB = MC: 100 − 4Q = 5 → Q = 23.75'},
-  {ch:'1',tag:'Ch.1 · Profit Concepts',q:'Revenue = $500,000. Explicit costs = $300,000. Opportunity cost = $80,000. Calculate accounting and economic profit.',a:'Accounting profit = $200,000. Economic profit = $200,000 − $80,000 = $120,000'},
-  {ch:'1',tag:'Ch.1 · Normative vs Positive',q:'Classify: (a) "If VAT rises 5%, spending falls." (b) "Government should cut taxes." (c) "Unemployment is 9%."',a:'(a) Positive — testable. (b) Normative — value judgement. (c) Positive — factual.'},
-  {ch:'2',tag:'Ch.2 · Supply & Demand',q:'Consumer incomes rise 3% and population over 25 hits an all-time high. What happens to P* and Q* in the rental car market?',a:'Demand increases (right shift). Both effects push demand up → P*↑ and Q*↑.'},
-  {ch:'2',tag:'Ch.2 · Excise Tax',q:'A $0.20 per-unit excise tax is placed on gasoline suppliers. What happens to supply, equilibrium price, and quantity?',a:'Supply shifts up by $0.20. P*↑ (by less than $0.20), Q*↓. Tax burden shared between buyers and sellers.'},
-  {ch:'2',tag:'Ch.2 · Price Ceiling',q:'Equilibrium rent = $1,200/month. Government sets a ceiling at $900. What are the consequences?',a:'Shortage (Qd > Qs). Consequences: waiting lists, nonpecuniary costs, deadweight loss, reduced housing quality.'},
-  {ch:'2',tag:'Ch.2 · Consumer Surplus',q:'Price = $3, quantity = 2 liters, demand curve hits price axis at $5. Calculate consumer surplus.',a:'CS = ½ × 2 × (5−3) = $2'},
-  {ch:'3',tag:'Ch.3 · Own-Price Elasticity',q:'Qd = 1,631 − 2.6P. At P = $3, Q = 1,000. Calculate own-price elasticity. Elastic or inelastic?',a:'E = −2.6 × (3/1,000) = −0.0078. |E| < 1 → Inelastic.'},
-  {ch:'3',tag:'Ch.3 · Total Revenue Test',q:'Price rises $10→$12 and TR rises $50,000→$54,000. What does this tell you about elasticity?',a:'P↑ and TR↑ → Demand is INELASTIC (|E| < 1).'},
-  {ch:'3',tag:'Ch.3 · Cross-Price Elasticity',q:'Price of Kiri rises 10%, demand for La Vache Qui Rit rises 15%. Calculate cross-price elasticity and identify the relationship.',a:'E = 15%/10% = +1.5. Positive → SUBSTITUTES.'},
-  {ch:'3',tag:'Ch.3 · MR & Elasticity',q:'Demand elasticity E = −2, price = $50. Calculate MR. Should the firm raise or lower price to increase revenue?',a:'MR = 50 × (1 + 1/−2) = $25. Demand is elastic → lower price to increase revenue.'},
-  {ch:'4',tag:'Ch.4 · Budget Constraint',q:'M = $600, Px = $10, Py = $40. (a) Write budget line. (b) Slope? (c) If Px rises to $20, how does it change?',a:'(a) 600 = 10X + 40Y. (b) Slope = −0.25. (c) Rotates inward; new slope = −0.5. X-intercept falls 60→30.'},
-  {ch:'4',tag:'Ch.4 · Consumer Equilibrium',q:'MRS = 3, Px = $6, Py = $3. Is the consumer in equilibrium? If not, what should they do?',a:'Px/Py = 2. MRS(3) > Px/Py(2) → Not in equilibrium. Buy more X and less Y until MRS = 2.'},
-  {ch:'4',tag:'Ch.4 · Substitution & Income Effects',q:'Price of good X falls. For a normal good, decompose the effect into substitution and income effects.',a:'Substitution effect: X cheaper → buy more X along same IC. Income effect: higher real income → buy more X. Both increase X consumption.'},
-  {ch:'5',tag:'Ch.5 · Isoquants & MRTS',q:'At a point on an isoquant, MPL = 12 and MPK = 4. (a) What is MRTS? (b) What happens to MRTS as more L is substituted for K?',a:'(a) MRTS = 12/4 = 3. (b) MRTS decreases (diminishing MRTS) → isoquant becomes flatter, explaining its convex shape.'},
-  {ch:'5',tag:'Ch.5 · Cost Minimization',q:'w = $20, r = $40, MPL = 80, MPK = 100. Is the firm minimizing costs? What should it do?',a:'MPL/w = 4, MPK/r = 2.5. MPL/w > MPK/r → Use MORE labor, LESS capital until MPL/w = MPK/r.'},
-  {ch:'5',tag:'Ch.5 · Profit Maximization',q:'P = $10, MPL of 5th worker = 8, wage = $100. Calculate VMPL. Should the firm hire this worker?',a:'VMPL = 10 × 8 = $80. VMPL($80) < w($100) → Do NOT hire. Hire only up to VMPL = w.'},
-  {ch:'5',tag:'Ch.5 · Isocost Lines',q:'C = $1,200, w = $20, r = $30. (a) Write isocost equation. (b) Slope? (c) If w rises to $40, how does it change?',a:'(a) 1,200 = 20L + 30K. (b) Slope = −2/3. (c) Pivots inward on L-axis; new slope = −4/3.'},
-  {ch:'5',tag:'Ch.5 · Economies of Scale',q:'A firm doubles all inputs and output more than doubles. (a) Returns to scale? (b) Effect on LRAC? (c) Give one real-world reason.',a:'(a) Increasing returns to scale. (b) LRAC falls → economies of scale. (c) Specialization or spreading fixed costs over more output.'},
+const MCQ=[
+  // CH1
+  {ch:'1',tag:'Ch.1 · Managerial Economics',q:'Which best defines managerial economics?',opts:['Study of macroeconomic trends','Directing scarce resources to efficiently achieve a managerial goal','Applying accounting principles to business','Analyzing government policies on firms'],ans:1},
+  {ch:'1',tag:'Ch.1 · Opportunity Cost',q:'Revenue=$400k, explicit costs=$250k, owner could earn $60k elsewhere. Economic profit?',opts:['$400,000','$150,000','$90,000','$210,000'],ans:2},
+  {ch:'1',tag:'Ch.1 · Accounting vs Economic Profit',q:'Economic profit differs from accounting profit because it also subtracts:',opts:['Total revenue','Explicit costs only','Implicit (opportunity) costs','Depreciation only'],ans:2},
+  {ch:'1',tag:'Ch.1 · Marginal Analysis',q:'Net benefits are maximized when:',opts:['Total benefit equals total cost','MB exceeds MC by the most','Marginal benefit equals marginal cost','Total benefit is maximum'],ans:2},
+  {ch:'1',tag:'Ch.1 · Present Value',q:'PV of $10,000 in 2 years at 5%?',opts:['$10,000','$9,524','$9,070','$11,025'],ans:2},
+  {ch:'1',tag:'Ch.1 · TVM Perpetuity',q:'Business earns $50,000/year forever. Interest rate = 10%. Present value?',opts:['$50,000','$500,000','$5,000','$550,000'],ans:1},
+  {ch:'1',tag:'Ch.1 · Normative vs Positive',q:'Which is a POSITIVE statement?',opts:['Minimum wage should be raised','Higher taxes reduce inequality','A 10% price increase leads to a 5% fall in Qd','Firms should prioritize employees over profits'],ans:2},
+  {ch:'1',tag:'Ch.1 · Six Principles',q:'Which is NOT one of the six principles of effective management?',opts:['Understand incentives','Recognize time value of money','Maximize employee headcount','Use marginal analysis'],ans:2},
+  {ch:'1',tag:'Ch.1 · Implicit Cost',q:'Which is an example of an implicit cost?',opts:['Rent paid for office space','Salaries paid to employees','Salary the owner foregoes by running the business','Raw materials purchased'],ans:2},
+  {ch:'1',tag:'Ch.1 · Profit Role',q:'Why do profits play an important role in a market economy?',opts:['They reduce competition','They signal where resources are most valued and guide allocation','They eliminate market failures','They always increase consumer surplus'],ans:1},
+  {ch:'1',tag:'Ch.1 · Marginal Analysis Calculation',q:'TB = 200Q minus 3Q squared, TC = 20Q. Profit-maximizing Q?',opts:['Q=20','Q=30','Q=40','Q=50'],ans:1},
+  // CH2
+  {ch:'2',tag:'Ch.2 · Law of Demand',q:'Which best reflects the law of demand?',opts:['Price up means Qd up','Income up means Qd down','Price up means Qd down ceteris paribus','Price down means Supply up'],ans:2},
+  {ch:'2',tag:'Ch.2 · Demand Shifters',q:'Which shifts demand for a normal good to the RIGHT?',opts:['Increase in its own price','Decrease in consumer income','Increase in consumer income','Decrease in price of a complement'],ans:2},
+  {ch:'2',tag:'Ch.2 · Substitutes',q:'Price of tea rises and demand for coffee increases. Tea and coffee are:',opts:['Complements','Inferior goods','Substitutes','Normal goods'],ans:2},
+  {ch:'2',tag:'Ch.2 · Consumer Surplus',q:'Consumer surplus is:',opts:['Profit earned by firms','Extra value consumers receive beyond what they pay','Area above supply curve below price','Total amount consumers spend'],ans:1},
+  {ch:'2',tag:'Ch.2 · Producer Surplus',q:'Producer surplus equals:',opts:['Total revenue minus explicit costs','Area below supply curve above price','Area above supply curve below price','Total profit after taxes'],ans:2},
+  {ch:'2',tag:'Ch.2 · Equilibrium',q:'At equilibrium in a competitive market:',opts:['Qd exceeds Qs','Price is set by government','Qd equals Qs','Firms earn zero profit'],ans:2},
+  {ch:'2',tag:'Ch.2 · Price Ceiling',q:'A price ceiling set BELOW equilibrium causes:',opts:['A surplus','A shortage','Supply to increase','Demand to decrease'],ans:1},
+  {ch:'2',tag:'Ch.2 · Price Floor',q:'A price floor set ABOVE equilibrium causes:',opts:['A shortage','A surplus','Demand to increase','Supply to decrease'],ans:1},
+  {ch:'2',tag:'Ch.2 · Excise Tax',q:'An excise tax on producers shifts supply:',opts:['Downward rightward','Upward leftward by the tax amount','Around the equilibrium point','Not at all'],ans:1},
+  {ch:'2',tag:'Ch.2 · Comparative Statics',q:'Demand increases AND supply decreases. What happens to P*?',opts:['Definitely falls','Definitely rises','Ambiguous','Stays the same'],ans:1},
+  {ch:'2',tag:'Ch.2 · Supply Shifters',q:'Which shifts supply to the RIGHT?',opts:['Higher input prices','New technology reducing production costs','A per-unit tax on producers','Fewer firms in the market'],ans:1},
+  {ch:'2',tag:'Ch.2 · Inferior Goods',q:'For an inferior good, when income rises:',opts:['Demand increases','Demand is unchanged','Demand decreases','Supply increases'],ans:2},
+  // CH3
+  {ch:'3',tag:'Ch.3 · Own-Price Elasticity',q:'Own-price elasticity = -0.4. Demand is:',opts:['Elastic','Unitary elastic','Inelastic','Perfectly elastic'],ans:2},
+  {ch:'3',tag:'Ch.3 · TR Test Price Cut',q:'Firm lowers price and TR increases. Demand is:',opts:['Inelastic','Unitary elastic','Elastic','Perfectly inelastic'],ans:2},
+  {ch:'3',tag:'Ch.3 · TR Test Price Rise',q:'For inelastic demand, raising price will:',opts:['Decrease TR','Increase TR','Keep TR constant','Decrease Qd more than proportionately'],ans:1},
+  {ch:'3',tag:'Ch.3 · MR Formula',q:'MR = P times (1 plus 1/E). When P=$100 and E=-1, MR=?',opts:['$100','$50','$0','$200'],ans:2},
+  {ch:'3',tag:'Ch.3 · Cross-Price Elasticity',q:'Cross-price elasticity of +2.5 between X and Y means:',opts:['X and Y are complements','X and Y are inferior goods','X and Y are substitutes','X is a normal good'],ans:2},
+  {ch:'3',tag:'Ch.3 · Income Elasticity',q:'Income elasticity = -0.8. The good is:',opts:['A luxury good','A normal necessity','An inferior good','A Giffen good'],ans:2},
+  {ch:'3',tag:'Ch.3 · Linear Demand Elasticity',q:'Qd = 500 - 4P. At P=$50, Q=300. Own-price elasticity?',opts:['-0.67','-4','-2','-0.5'],ans:0},
+  {ch:'3',tag:'Ch.3 · Factors of Elasticity',q:'Which makes demand MORE elastic?',opts:['Small share of budget','Short time horizon','Many available substitutes','Necessity goods'],ans:2},
+  {ch:'3',tag:'Ch.3 · Inelastic Range',q:'A firm should never produce in the inelastic portion of demand because:',opts:['MC is negative there','MR is negative so revenue falls as output rises','Demand is too high','Fixed costs are higher there'],ans:1},
+  // CH4
+  {ch:'4',tag:'Ch.4 · Budget Constraint Slope',q:'M=$800, Px=$20, Py=$40. Slope of budget line?',opts:['-0.25','-0.5','-2','-40'],ans:1},
+  {ch:'4',tag:'Ch.4 · Income Change',q:'Income increases, prices unchanged. Budget line:',opts:['Rotates around Y-intercept','Shifts inward parallel','Shifts outward parallel','Becomes steeper'],ans:2},
+  {ch:'4',tag:'Ch.4 · Consumer Equilibrium Condition',q:'At consumer equilibrium:',opts:['MRS greater than Px/Py','MRS less than Px/Py','MRS equals Px/Py','MRS equals 0'],ans:2},
+  {ch:'4',tag:'Ch.4 · MRS Disequilibrium',q:'MRS=4, Px/Py=2. Consumer should:',opts:['Buy less X more Y','Buy more X less Y','Stay at same bundle','Buy less of both'],ans:1},
+  {ch:'4',tag:'Ch.4 · IC Convexity',q:'Indifference curves are convex to the origin because of:',opts:['Increasing marginal utility','Diminishing MRS','Constant returns to consumption','The law of supply'],ans:1},
+  {ch:'4',tag:'Ch.4 · Substitution Effect',q:'Which effect keeps utility constant when price changes?',opts:['Income effect','Substitution effect','Wealth effect','Price effect'],ans:1},
+  {ch:'4',tag:'Ch.4 · Income Effect Normal Good',q:'For a normal good, income effect of a price decrease:',opts:['Reduces consumption','Has no effect','Increases consumption','Reverses substitution effect'],ans:2},
+  {ch:'4',tag:'Ch.4 · Cash vs Gift Certificate',q:'A $200 cash gift is generally preferred to a $200 gift certificate because:',opts:['Cash has higher monetary value','Gift certificate inflates prices','Cash gives full flexibility to spend on any goods','Gift certificates always expire'],ans:2},
+  {ch:'4',tag:'Ch.4 · Market Demand Derivation',q:'The market demand curve is derived by:',opts:['Vertical summation of individual demands','Taking the average of individual demands','Horizontal summation of individual demands','Multiplying individual demands'],ans:2},
+  // CH5
+  {ch:'5',tag:'Ch.5 · Isoquants',q:'An isoquant shows all input combinations that:',opts:['Cost the same total amount','Produce the same output level','Maximize profit','Minimize total cost'],ans:1},
+  {ch:'5',tag:'Ch.5 · MRTS Formula',q:'MRTS equals:',opts:['w/r','MPK/MPL','MPL/MPK','MC/MR'],ans:2},
+  {ch:'5',tag:'Ch.5 · Diminishing MRTS',q:'Diminishing MRTS explains why isoquants are:',opts:['Upward sloping','Straight lines','Convex to the origin','Concave to the origin'],ans:2},
+  {ch:'5',tag:'Ch.5 · Isocost Slope',q:'Slope of the isocost line is:',opts:['-MPL/MPK','-w/r','-r/w','-MR/MC'],ans:1},
+  {ch:'5',tag:'Ch.5 · Cost Minimization Condition',q:'A firm minimizes cost when:',opts:['MRTS greater than w/r','MPL/w greater than MPK/r','MRTS equals w/r isoquant tangent to isocost','MR equals MC'],ans:2},
+  {ch:'5',tag:'Ch.5 · Input Reallocation',q:'If MPL/w is greater than MPK/r, the firm should:',opts:['Use more capital less labor','Use more labor less capital','Keep input mix unchanged','Shut down production'],ans:1},
+  {ch:'5',tag:'Ch.5 · VMPL Rule',q:'Profit is maximized when hiring labor up to where:',opts:['MPL equals MPK','VMPL equals MPL','VMPL equals wage w','MR equals w'],ans:2},
+  {ch:'5',tag:'Ch.5 · VMPL Calculation',q:'P=$5, MPL=20. What is VMPL?',opts:['$4','$25','$100','$15'],ans:2},
+  {ch:'5',tag:'Ch.5 · MR=MC Rule',q:'Profit-maximizing output is where:',opts:['Total revenue is maximized','Marginal cost is minimized','MR equals MC','Average cost is minimized'],ans:2},
+  {ch:'5',tag:'Ch.5 · Economies of Scale',q:'Economies of scale exist when:',opts:['LRAC increases as output increases','LRAC is constant','LRAC decreases as output increases','Short-run costs fall with output'],ans:2},
+  {ch:'5',tag:'Ch.5 · Diseconomies of Scale',q:'Diseconomies of scale occur when doubling inputs leads to:',opts:['Output more than doubling','Output exactly doubling','Output less than doubling','Costs halving'],ans:2},
+  // EXAM STYLE
+  {ch:'exam',tag:'Exam Style · Income Elasticity',q:'If the income elasticity of demand is 2.5, the good is best classified as:',opts:['An inferior good','A necessity','A luxury good','A Giffen good'],ans:2},
+  {ch:'exam',tag:'Exam Style · Income Elasticity',q:'When income rises by 10% and demand for a good falls by 4%, the income elasticity is:',opts:['+0.4','-0.4','+2.5','-2.5'],ans:1},
+  {ch:'exam',tag:'Exam Style · Substitution Effect',q:'When the price of good X falls and a consumer buys more X instead of Y, this is called:',opts:['Income effect','Price effect','Substitution effect','Demand effect'],ans:2},
+  {ch:'exam',tag:'Exam Style · Time Value of Money',q:'The principle that a dollar received today is worth more than a dollar received in the future relates to:',opts:['Opportunity cost principle','Equi-marginal principle','Discounting principle','Incremental principle'],ans:2},
+  {ch:'exam',tag:'Exam Style · Incremental Principle',q:'The incremental principle in managerial economics is most closely related to:',opts:['Average revenue and average cost','Marginal revenue and marginal cost','Total revenue and total cost','Fixed cost and variable cost'],ans:1},
+  {ch:'exam',tag:'Exam Style · Giffen Goods',q:'For a Giffen good, when price rises, quantity demanded:',opts:['Falls because the substitution effect dominates','Falls because of the income effect','Rises because the income effect dominates the substitution effect','Stays the same'],ans:2},
+
+  {ch:'exam',tag:'Exam Style · Demand Curve',q:'The standard demand curve slopes:',opts:['Upward because higher prices mean more demand','Downward because of the law of demand','Horizontally for all normal goods','Vertically for perfectly inelastic goods'],ans:1},
+  {ch:'exam',tag:'Exam Style · Veblen Effect',q:'When higher prices for luxury goods lead to higher demand because of status signaling, this is called:',opts:['Giffen effect','Income effect','Veblen effect','Substitution effect'],ans:2},
+  {ch:'exam',tag:'Exam Style · Perfect Elasticity',q:'A perfectly elastic demand curve is:',opts:['Vertical','Downward sloping','Horizontal','Upward sloping'],ans:2},
+  {ch:'exam',tag:'Exam Style · Opportunity Cost',q:'The opportunity cost of a decision is best defined as:',opts:['The total monetary cost of the decision','The highest-valued alternative that must be foregone','The accounting cost minus depreciation','The fixed cost of the decision'],ans:1},
+  {ch:'exam',tag:'Exam Style · Scarcity',q:'The fundamental economic problem that gives rise to all economic decisions is:',opts:['Inflation','Unemployment','Scarcity of resources relative to unlimited wants','Government regulation'],ans:2},
+  {ch:'exam',tag:'Exam Style · Cross-Price Elasticity',q:'In Morocco, tea and sugar are typically consumed together. Their cross-price elasticity of demand is most likely:',opts:['Positive','Zero','Negative','Infinite'],ans:2},
+  {ch:'exam',tag:'Exam Style · Diminishing Returns',q:'The law of diminishing returns states that as more of a variable input is added:',opts:['Total product always falls','Average product always rises','Marginal product eventually decreases','Fixed costs increase'],ans:2},
+  {ch:'exam',tag:'Exam Style · Supply Shift',q:'Which of the following would cause the supply curve for wheat to shift rightward?',opts:['An increase in the price of wheat','A decrease in the price of wheat','A fall in the cost of fertilizer used to grow wheat','An increase in consumer income'],ans:2},
+  {ch:'exam',tag:'Exam Style · Inelastic Demand and Revenue',q:'Barley supply falls due to drought and demand is inelastic. What happens to farmer revenue?',opts:['Falls because quantity sold decreases','Rises because the percentage price increase exceeds the percentage quantity decrease','Falls because consumers buy less','Stays constant because demand is inelastic'],ans:1},
+  {ch:'exam',tag:'Exam Style · Demand vs Quantity Demanded',q:'A change in the price of a good causes:',opts:['A shift in the demand curve','A movement along the demand curve','Both a shift and a movement','Neither a shift nor a movement'],ans:1},
+  {ch:'exam',tag:'Exam Style · Consumer Surplus and Price Ceiling',q:'When the government imposes a price ceiling below equilibrium price, consumer surplus:',opts:['Always increases for all consumers','Always decreases for all consumers','May increase for some consumers but total welfare falls','Stays the same'],ans:2},
+  {ch:'exam',tag:'Exam Style · Net Benefits',q:'Given B(Q) = 100 + 30Q - 4Q squared and C(Q) = 80 + 10Q, what is the Q that maximizes net benefits?',opts:['Q = 2','Q = 2.5','Q = 3','Q = 5'],ans:1},
 ];
 
-const MATERIAL=`ECO5305 ADVANCED MANAGERIAL ECONOMICS — Dr. Hind Lebdaoui
-CH1: 6 principles: goals&constraints; accounting profit=TR−explicit costs, economic profit=TR−all costs incl. opportunity cost; Porter's Five Forces; incentives; markets; TVM PV=FV/(1+i)^n. Marginal analysis: MB=MC. Normative=value judgement; Positive=testable.
-CH2: Law of demand P↑→Qd↓. Demand shifters: income(normal/inferior), related prices(substitutes/complements), advertising, population, expectations. Consumer surplus=triangle above price below demand. Law of supply P↑→Qs↑. Supply shifters: input prices, technology, firms, taxes. Excise tax shifts supply up. Producer surplus. Equilibrium Qd=Qs. Price ceiling→shortage. Price floor→surplus. Comparative statics: D↑→P*↑Q*↑; S↑→P*↓Q*↑.
-CH3: Own-price elasticity=%ΔQ/%ΔP; elastic|E|>1,inelastic|E|<1. TR test: elastic P↑→TR↓; inelastic P↑→TR↑. MR=P(1+1/E). Cross-price: positive=substitutes,negative=complements. Income: positive=normal,negative=inferior. Linear E=b(P/Q). Log-linear: coefficients are elasticities. Regression: R-squared=fit,p-value=significance.
-CH4: Budget constraint M=PxX+PyY, slope=−Px/Py. Equilibrium: MRS=Px/Py. Substitution effect: along same IC. Income effect: shift to new IC. Normal: income↑→Q↑. Inferior: income↑→Q↓. Market demand=horizontal sum.
-CH5(required only): Isoquants=same output combos of L&K, convex, downward sloping. MRTS=MPL/MPK; diminishing MRTS. Isocost: C=wL+rK, slope=−w/r. Cost minimization: MRTS=w/r→MPL/w=MPK/r. Profit max: VMPL=P×MPL=w; VMPK=P×MPK=r. MR=MC profit max output rule. Economies of scale: LRAC falls; diseconomies: LRAC rises; constant: LRAC flat.`;
+const OPEN=[
+  {ch:'1',tag:'Ch.1 · Time Value of Money',q:'What is the max you would pay for an asset generating $250,000/year for 5 years at 8% opportunity cost?',a:'PV approximately $998,175 (sum of discounted cash flows for 5 years at 8%)'},
+  {ch:'1',tag:'Ch.1 · Marginal Analysis',q:'TB = 100Q minus 2Q squared, TC = 5Q. Profit-maximizing Q?',a:'MB = MC: 100 minus 4Q = 5, so Q = 23.75'},
+  {ch:'1',tag:'Ch.1 · Profit',q:'Revenue=$500k, explicit costs=$300k, opportunity cost=$80k. Accounting and economic profit?',a:'Accounting profit = $200k. Economic profit = $120k.'},
+  {ch:'1',tag:'Ch.1 · Normative vs Positive',q:'Classify each: (a) VAT up 5% means spending down (b) Government should cut taxes (c) Unemployment is 9%',a:'(a) Positive — testable (b) Normative — value judgement (c) Positive — factual'},
+  {ch:'2',tag:'Ch.2 · Supply and Demand',q:'Incomes rise 3%, population over 25 hits record high. Effect on rental car market P* and Q*?',a:'Demand shifts right — P* up and Q* up'},
+  {ch:'2',tag:'Ch.2 · Excise Tax',q:'$0.20 per unit excise tax on gasoline suppliers. Effect on supply, P*, Q*?',a:'Supply shifts up $0.20. P* rises by less than $0.20, Q* falls. Tax burden shared between buyers and sellers.'},
+  {ch:'2',tag:'Ch.2 · Price Ceiling',q:'Equilibrium rent=$1,200. Ceiling set at $900. Consequences?',a:'Shortage (Qd greater than Qs), waiting lists, nonpecuniary costs, deadweight loss, reduced housing quality.'},
+  {ch:'2',tag:'Ch.2 · Consumer Surplus',q:'P=$3, Q=2 liters, demand hits price axis at $5. Consumer surplus?',a:'CS = 0.5 times 2 times (5 minus 3) = $2'},
+  {ch:'3',tag:'Ch.3 · Elasticity Calculation',q:'Qd = 1631 minus 2.6P. At P=$3, Q=1000. Own-price elasticity? Elastic or inelastic?',a:'E = minus 2.6 times (3/1000) = minus 0.0078. Inelastic because absolute value is less than 1.'},
+  {ch:'3',tag:'Ch.3 · TR Test',q:'Price rises from $10 to $12 and TR rises from $50k to $54k. What does this indicate?',a:'Price up and TR up means demand is INELASTIC.'},
+  {ch:'3',tag:'Ch.3 · Cross-Price',q:'Kiri price up 10%, La Vache Qui Rit demand up 15%. Cross-price elasticity and relationship?',a:'E = plus 1.5. Positive means they are SUBSTITUTES.'},
+  {ch:'3',tag:'Ch.3 · MR',q:'E = -2, P = $50. Calculate MR. Should firm raise or lower price to increase revenue?',a:'MR = 50 times (1 plus 1 divided by minus 2) = $25. Demand is elastic so lower price to increase revenue.'},
+  {ch:'4',tag:'Ch.4 · Budget Constraint',q:'M=$600, Px=$10, Py=$40. (a) Write budget line (b) What is the slope? (c) What happens when Px rises to $20?',a:'(a) 600 = 10X + 40Y (b) Slope = minus 0.25 (c) Budget line rotates inward, new slope = minus 0.5, X-intercept falls from 60 to 30'},
+  {ch:'4',tag:'Ch.4 · Equilibrium',q:'MRS=3, Px=$6, Py=$3. Is the consumer in equilibrium? What should they do?',a:'Px/Py = 2. MRS (3) greater than Px/Py (2) means not in equilibrium. Buy more X and less Y until MRS falls to 2.'},
+  {ch:'4',tag:'Ch.4 · Substitution and Income Effects',q:'Price of X falls. Decompose the total effect for a normal good into substitution and income effects.',a:'Substitution effect: move along indifference curve, consume more X. Income effect: real income rises, consume more X (normal good). Both effects reinforce each other.'},
+  {ch:'5',tag:'Ch.5 · MRTS',q:'MPL=12, MPK=4. (a) What is MRTS? (b) What happens to MRTS as more L substitutes for K?',a:'(a) MRTS = 12/4 = 3 (b) MRTS decreases due to diminishing MRTS, the isoquant becomes flatter and convex.'},
+  {ch:'5',tag:'Ch.5 · Cost Minimization',q:'w=$20, r=$40, MPL=80, MPK=100. Is the firm minimizing costs? What should it do?',a:'MPL/w = 4 is greater than MPK/r = 2.5. Firm should use MORE labor and LESS capital until the condition MPL/w = MPK/r is met.'},
+  {ch:'5',tag:'Ch.5 · Profit Max',q:'P=$10, MPL of 5th worker=8, w=$100. Calculate VMPL. Should the firm hire this worker?',a:'VMPL = 10 times 8 = $80. VMPL ($80) is less than w ($100) so do NOT hire this worker.'},
+  {ch:'5',tag:'Ch.5 · Isocost',q:'C=$1200, w=$20, r=$30. (a) Write the isocost equation (b) What is the slope? (c) What happens if w rises to $40?',a:'(a) 1200 = 20L + 30K (b) Slope = minus 2/3 (c) Isocost pivots inward on L-axis, new slope = minus 4/3, L-intercept falls from 60 to 30'},
+  {ch:'5',tag:'Ch.5 · Economies of Scale',q:'A firm doubles all inputs and output more than doubles. What type of returns to scale? What happens to LRAC? Give one reason.',a:'Increasing returns to scale. LRAC falls meaning economies of scale. Reason: specialization of labor or spreading fixed costs over more output.'},
+  // EXAM STYLE OPEN
+  {ch:'exam',tag:'Exam Style · Net Benefits Problem',q:'B(Q) = 120 + 40Q - 5Q squared and C(Q) = 90 + 15Q. (a) Write net benefits equation. (b) Net benefits when Q=2 and Q=6. (c) What Q maximizes net benefits?',a:'(a) NB = B - C = 30 + 25Q - 5Q squared. (b) Q=2: NB = 30+50-20 = $60. Q=6: NB = 30+150-180 = $0. (c) MNB = 25 - 10Q = 0, so Q = 2.5 maximizes net benefits.'},
+  {ch:'exam',tag:'Exam Style · Consumer Surplus and Price Ceiling',q:'Explain consumer surplus using a diagram. How does a government price ceiling affect it?',a:'Consumer surplus is the area below the demand curve and above the market price — the extra value buyers receive beyond what they pay. A price ceiling set below equilibrium creates a shortage. While some consumers who can buy at the lower price gain surplus, others cannot find the good at all. Total welfare falls because of deadweight loss — the gains to some consumers are less than the combined loss to producers and excluded consumers.'},
+  {ch:'exam',tag:'Exam Style · Opportunity Cost',q:'A business owner earns $180,000 in revenue. Explicit costs are $100,000. She could earn $60,000 as an employee. Calculate accounting and economic profit. Is she making a good decision?',a:'Accounting profit = 180,000 minus 100,000 = $80,000. Economic profit = 80,000 minus 60,000 = $20,000. Yes, she is earning a positive economic profit so it is worth running the business.'},
+  {ch:'exam',tag:'Exam Style · Demand Extension vs Shift',q:'Distinguish between an extension of demand and a shift in demand. Give one example of each.',a:'Extension of demand: movement along the existing demand curve caused by a change in the price of the good itself. Example: price of coffee falls so more coffee is bought. Shift in demand: the entire demand curve moves because of a change in a non-price factor. Example: consumer incomes rise so demand for normal goods increases at every price.'},
+];
 
-function showTeacher(){document.getElementById('studentForm').style.display='none';document.getElementById('teacherForm').style.display='flex';document.getElementById('teacherForm').style.flexDirection='column'}
-function showStudent(){document.getElementById('teacherForm').style.display='none';document.getElementById('studentForm').style.display='flex';document.getElementById('studentForm').style.flexDirection='column'}
+const MATERIAL=`ECO5305 by Dr. Hind Lebdaoui.
+CH1: Managerial economics means directing scarce resources efficiently. Six principles: goals and constraints; accounting profit equals TR minus explicit costs, economic profit equals TR minus all costs including opportunity cost; Porter Five Forces; incentives; markets; TVM where PV equals FV divided by (1+i) to the power n. Marginal analysis: MB equals MC. Incremental principle: decisions based on marginal changes. Discounting principle: future money is worth less than present money. Normative is value judgement; Positive is testable.
+CH2: Law of demand: price up means Qd down. Demand shifters: income (normal or inferior goods), related prices (substitutes or complements), advertising, population, expectations. Veblen effect: luxury goods where higher price increases demand due to status. Consumer surplus is triangle above price below demand. Law of supply: price up means Qs up. Excise tax shifts supply up. Producer surplus is triangle above supply below price. Equilibrium: Qd equals Qs. Price ceiling causes shortage. Price floor causes surplus.
+CH3: Own-price elasticity equals percent change Q divided by percent change P. Elastic means absolute value greater than 1, inelastic means less than 1. TR test: elastic means price up leads to TR down; inelastic means price up leads to TR up. MR equals P times (1 plus 1/E). Cross-price positive means substitutes, negative means complements. Income positive means normal, negative means inferior. Income elasticity greater than 1 means luxury; between 0 and 1 means necessity; negative means inferior.
+CH4: Budget constraint is M equals Px times X plus Py times Y, slope equals negative Px/Py. Equilibrium: MRS equals Px/Py. Substitution effect keeps utility constant. Income effect changes real income. Normal good: income up means Q up. Inferior good: income up means Q down. Giffen good: price up leads to more consumption because income effect dominates substitution effect. Market demand equals horizontal sum.
+CH5 required topics only: Isoquants show same output combinations of L and K, convex and downward sloping. MRTS equals MPL/MPK and diminishes along isoquant. Isocost is C equals wL plus rK, slope equals negative w/r. Cost minimization: MRTS equals w/r which means MPL/w equals MPK/r. Profit maximization: VMPL equals w; VMPK equals r; MR equals MC for output. Economies of scale: LRAC falls as output rises. Diseconomies: LRAC rises. Constant returns: LRAC flat.
+`;
 
-async function startStudent(){
+function showTeacher(){document.getElementById('studentForm').style.display='none';document.getElementById('teacherForm').style.cssText='display:flex;flex-direction:column;gap:14px'}
+function showStudent(){document.getElementById('teacherForm').style.display='none';document.getElementById('studentForm').style.cssText='display:flex;flex-direction:column;gap:14px'}
+function startStudent(){
   const n=document.getElementById('sName').value.trim(),i=document.getElementById('sId').value.trim();
-  const e=document.getElementById('sErr');
-  if(!n||!i){e.style.display='block';return}
-  e.style.display='none';
+  if(!n||!i){document.getElementById('sErr').style.display='block';return}
+  document.getElementById('sErr').style.display='none';
   student={name:n,id:i};sessionId='sess_'+Date.now();
   document.getElementById('sPill').textContent=n;
   document.getElementById('loginScreen').style.display='none';
   document.getElementById('appScreen').classList.add('on');
   renderQuiz();
-  await logEvent('session_start',{student_name:n,student_id:i,session_id:sessionId});
 }
-
 function checkTeacher(){
-  const p=document.getElementById('tPass').value;
-  const e=document.getElementById('tErr');
-  if(p!==TEACHER_PASS){e.style.display='block';return}
-  e.style.display='none';
+  if(document.getElementById('tPass').value!==TEACHER_PASS){document.getElementById('tErr').style.display='block';return}
+  document.getElementById('tErr').style.display='none';
   document.getElementById('loginScreen').style.display='none';
   document.getElementById('dashScreen').classList.add('on');
-  loadDash();
 }
-
 function logout(){
   document.getElementById('dashScreen').classList.remove('on');
-  document.getElementById('loginScreen').style.display='flex';
-  document.getElementById('loginScreen').style.flexDirection='column';
-  document.getElementById('loginScreen').style.alignItems='center';
-  document.getElementById('tPass').value='';
-  showStudent();
+  document.getElementById('loginScreen').style.cssText='display:flex;flex-direction:column;align-items:center;gap:24px';
+  document.getElementById('tPass').value='';showStudent();
 }
-
-async function logEvent(type,data){
-  try{
-    await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:200,mcp_servers:[{type:'url',url:SUPABASE_URL,name:'supabase'}],messages:[{role:'user',content:`Insert into hindonomics_logs table in Supabase. Create table if needed with columns: id(serial primary key), event_type(text), student_name(text), student_id(text), session_id(text), question_text(text), chapter(integer), created_at(timestamptz). Data: ${JSON.stringify({event_type:type,...data,created_at:new Date().toISOString()})}. Reply "done".`}]})});
-  }catch(e){}
+function resetScore(){scoreCorrect=0;scoreWrong=0;answered={};updateScore();renderQuiz()}
+function updateScore(){
+  const t=scoreCorrect+scoreWrong;
+  document.getElementById('scoreStrip').style.display=t?'flex':'none';
+  document.getElementById('scCorrect').textContent=scoreCorrect;
+  document.getElementById('scWrong').textContent=scoreWrong;
+  document.getElementById('scPct').textContent=t?Math.round(scoreCorrect/t*100)+'%':'0%';
 }
-
-async function fetchLogs(){
-  const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:4000,mcp_servers:[{type:'url',url:SUPABASE_URL,name:'supabase'}],messages:[{role:'user',content:'Query ALL rows from hindonomics_logs table in Supabase ordered by created_at desc. Return ONLY a JSON array of objects with all columns. If table is empty or missing return [].'}]})});
-  const d=await r.json();
-  const t=d.content?.find(b=>b.type==='text')?.text||'[]';
-  try{return JSON.parse(t.replace(/```json|```/g,'').trim())}catch(e){return[]}
+function setQType(t,el){qtype=t;document.querySelectorAll('.qtype-tab').forEach(b=>b.classList.remove('on'));el.classList.add('on');revealed={};answered={};scoreCorrect=0;scoreWrong=0;updateScore();renderQuiz()}
+function fq(c,el){qf=c;document.querySelectorAll('.cpill').forEach(p=>p.classList.remove('on'));el.classList.add('on');revealed={};answered={};scoreCorrect=0;scoreWrong=0;updateScore();renderQuiz()}
+function renderQuiz(){
+  const l=document.getElementById('qlist');if(!l)return;
+  if(qtype==='mcq'){
+    const qs=qf==='all'?MCQ:MCQ.filter(q=>q.ch===qf);
+    l.innerHTML=qs.map((q,i)=>{
+      const id='m_'+qf+'_'+i;const done=answered[id];
+      const opts=q.opts.map((o,oi)=>{
+        let cls='mcq-opt';
+        if(done!==undefined){if(oi===q.ans)cls+=' correct';else if(oi===done&&done!==q.ans)cls+=' wrong';}
+        return'<button class="'+cls+'" onclick="answerMCQ(\''+id+'\','+oi+','+q.ans+')" '+(done!==undefined?'disabled':'')+'>'+String.fromCharCode(65+oi)+'. '+o+'</button>';
+      }).join('');
+      const fb=done!==undefined?(done===q.ans?'<div class="mcq-feedback ok show">Correct!</div>':'<div class="mcq-feedback no show">Correct answer: <strong>'+String.fromCharCode(65+q.ans)+'. '+q.opts[q.ans]+'</strong></div>'):'';
+      return'<div class="qcard"><div class="qtag">'+q.tag+'</div><div class="qtext">'+q.q+'</div><div class="mcq-opts">'+opts+'</div>'+fb+'<div class="qbtns"><button onclick="disc(\''+q.q.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+'\')">💬 Discuss with Hindonomics</button></div></div>';
+    }).join('');
+  } else {
+    const qs=qf==='all'?OPEN:OPEN.filter(q=>q.ch===qf);
+    l.innerHTML=qs.map((q,i)=>{const id='o_'+qf+'_'+i;const s=revealed[id];
+      return'<div class="qcard"><div class="qtag">'+q.tag+'</div><div class="qtext">'+q.q+'</div><div class="qbtns"><button onclick="disc(\''+q.q.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+'\')">💬 Discuss</button><button class="pri" onclick="tog(\''+id+'\')">'+(s?'Hide':'Show answer')+'</button></div><div class="ans-box'+(s?' show':'')+'" id="ans_'+id+'">'+q.a+'</div></div>';
+    }).join('');
+  }
 }
-
-async function loadDash(){
-  document.getElementById('dashContent').innerHTML='<div class="empty">Fetching data from Supabase…</div>';
-  const logs=await fetchLogs();
-  renderDash(logs);
+function answerMCQ(id,chosen,correct){
+  if(answered[id]!==undefined)return;
+  answered[id]=chosen;
+  if(chosen===correct)scoreCorrect++;else scoreWrong++;
+  updateScore();renderQuiz();
 }
-
-function renderDash(logs){
-  const el=document.getElementById('dashContent');
-  if(!logs.length){el.innerHTML='<div class="empty">No student activity yet.<br>Share the link with your students to start collecting data.</div>';return}
-  const sessions=logs.filter(l=>l.event_type==='session_start');
-  const questions=logs.filter(l=>l.event_type==='question_asked');
-  const unique=[...new Set(sessions.map(s=>s.student_id))];
-  const cc={1:0,2:0,3:0,4:0,5:0};
-  questions.forEach(q=>{if(q.chapter&&cc[q.chapter]!==undefined)cc[q.chapter]++});
-  const mx=Math.max(...Object.values(cc),1);
-  el.innerHTML=`
-    <div class="row-between"><span class="sec-title">Overview</span><button class="refresh-btn" onclick="loadDash()">↻ Refresh</button></div>
-    <div class="stat-grid">
-      <div class="stat-card"><div class="slabel">Total sessions</div><div class="sval">${sessions.length}</div><div class="ssub">all time</div></div>
-      <div class="stat-card"><div class="slabel">Unique students</div><div class="sval">${unique.length}</div><div class="ssub">distinct IDs</div></div>
-      <div class="stat-card"><div class="slabel">Questions asked</div><div class="sval">${questions.length}</div><div class="ssub">total</div></div>
-      <div class="stat-card"><div class="slabel">Avg per student</div><div class="sval">${unique.length?Math.round(questions.length/unique.length):0}</div><div class="ssub">questions</div></div>
-    </div>
-    <span class="sec-title">Activity by chapter</span>
-    <div class="bar-wrap">
-      ${[1,2,3,4,5].map(c=>`<div class="bar-row"><div class="bar-label">Chapter ${c}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.round(cc[c]/mx*100)}%"></div></div><div class="bar-count">${cc[c]}</div></div>`).join('')}
-    </div>
-    <span class="sec-title">Recent sessions</span>
-    <div class="table-wrap"><table>
-      <thead><tr><th>Student</th><th>ID</th><th>Time</th></tr></thead>
-      <tbody>${sessions.slice(0,10).map(s=>`<tr><td>${s.student_name||'—'}</td><td>${s.student_id||'—'}</td><td style="color:var(--muted)">${s.created_at?new Date(s.created_at).toLocaleString():'—'}</td></tr>`).join('')||'<tr><td colspan="3" style="text-align:center;color:var(--muted)">No sessions yet</td></tr>'}</tbody>
-    </table></div>
-    ${questions.length?`<span class="sec-title">Recent questions</span>
-    <div class="table-wrap"><table>
-      <thead><tr><th>Student</th><th>Ch.</th><th>Question</th></tr></thead>
-      <tbody>${questions.slice(0,8).map(q=>`<tr><td>${q.student_name||'—'}</td><td><span class="ch-badge">Ch.${q.chapter||'?'}</span></td><td style="color:var(--muted);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${q.question_text||'—'}</td></tr>`).join('')}</tbody>
-    </table></div>`:''}`;
-}
-
-function detectCh(t){
-  const s=t.toLowerCase();
-  if(s.includes('present value')||s.includes('marginal analysis')||s.includes('opportunity cost')||s.includes('accounting profit'))return 1;
-  if(s.includes('supply')||s.includes('demand')||s.includes('equilibrium')||s.includes('surplus')||s.includes('ceiling')||s.includes('floor'))return 2;
-  if(s.includes('elasticity')||s.includes('elastic')||s.includes('revenue test')||s.includes('regression'))return 3;
-  if(s.includes('indifference')||s.includes('budget')||s.includes('consumer')||s.includes('substitution effect'))return 4;
-  if(s.includes('isoquant')||s.includes('isocost')||s.includes('mrts')||s.includes('economies of scale')||s.includes('vmpl'))return 5;
-  return null;
-}
-
+function tog(id){revealed[id]=!revealed[id];renderQuiz()}
+function disc(q){switchTab('chat');document.getElementById('uInput').value=q;sendMsg()}
+function qa(q){document.getElementById('uInput').value=q;sendMsg()}
+function hk(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg()}}
 function switchTab(t){
   document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('on',(t==='chat'&&i===0)||(t==='quiz'&&i===1)));
   document.getElementById('chatPanel').classList.toggle('on',t==='chat');
   document.getElementById('quizPanel').classList.toggle('on',t==='quiz');
 }
-
-function fq(c,el){qf=c;document.querySelectorAll('.cpill').forEach(p=>p.classList.remove('on'));el.classList.add('on');revealed={};renderQuiz()}
-
-function renderQuiz(){
-  const l=document.getElementById('qlist');if(!l)return;
-  const qs=qf==='all'?QS:QS.filter(q=>q.ch===qf);
-  l.innerHTML=qs.map((q,i)=>{const id=`q_${qf}_${i}`;const s=revealed[id];
-    return`<div class="qcard"><div class="qtag">${q.tag}</div><div class="qtext">${q.q.replace(/\n/g,'<br>')}</div><div class="qbtns"><button onclick="disc(${JSON.stringify(q.q)})">💬 Discuss</button><button class="pri" onclick="tog('${id}')">${s?'Hide answer':'Show answer'}</button></div><div class="ans-box${s?' show':''}" id="ans_${id}">${q.a.replace(/\n/g,'<br>')}</div></div>`;
-  }).join('');
-}
-
-function tog(id){revealed[id]=!revealed[id];renderQuiz()}
-function disc(q){switchTab('chat');document.getElementById('uInput').value=q;sendMsg()}
-function qa(q){document.getElementById('uInput').value=q;sendMsg()}
-function hk(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg()}}
-
 function addMsg(role,text){
   const m=document.getElementById('messages');
   const d=document.createElement('div');d.className='msg '+role;
-  d.innerHTML=(role==='bot'?'<div class="ico">🎓</div>':'<div class="ico">👤</div>')+`<div class="bubble">${text.replace(/\n/g,'<br>')}</div>`;
+  d.innerHTML=(role==='bot'?'<div class="ico">🎓</div>':'<div class="ico">👤</div>')+'<div class="bubble">'+text.replace(/\n/g,'<br>')+'</div>';
   m.appendChild(d);m.scrollTop=m.scrollHeight;
 }
-function showTyping(){const m=document.getElementById('messages');const d=document.createElement('div');d.className='msg bot';d.id='typing';d.innerHTML='<div class="ico">🎓</div><div class="bubble"><div class="typing"><span></span><span></span><span></span></div></div>';m.appendChild(d);m.scrollTop=m.scrollHeight}
+function showTyping(){
+  const m=document.getElementById('messages');
+  const d=document.createElement('div');d.className='msg bot';d.id='typing';
+  d.innerHTML='<div class="ico">🎓</div><div class="bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
+  m.appendChild(d);m.scrollTop=m.scrollHeight;
+}
 function rmTyping(){const t=document.getElementById('typing');if(t)t.remove()}
-
+function detectCh(t){
+  const s=t.toLowerCase();
+  if(s.includes('present value')||s.includes('marginal analysis')||s.includes('opportunity cost')||s.includes('six principles')||s.includes('discounting')||s.includes('incremental'))return 1;
+  if(s.includes('supply')||s.includes('demand')||s.includes('equilibrium')||s.includes('surplus')||s.includes('ceiling')||s.includes('excise')||s.includes('veblen')||s.includes('giffen'))return 2;
+  if(s.includes('elasticity')||s.includes('elastic')||s.includes('revenue test')||s.includes('regression')||s.includes('inferior')||s.includes('luxury')||s.includes('necessity'))return 3;
+  if(s.includes('indifference')||s.includes('budget')||s.includes('consumer')||s.includes('substitution effect')||s.includes('income effect'))return 4;
+  if(s.includes('isoquant')||s.includes('isocost')||s.includes('mrts')||s.includes('vmpl')||s.includes('economies of scale'))return 5;
+  return null;
+}
 async function sendMsg(){
-  const inp=document.getElementById('uInput');const text=inp.value.trim();if(!text)return;
-  inp.value='';addMsg('user',text);history.push({role:'user',content:text});showTyping();
-  const ch=detectCh(text);
-  await logEvent('question_asked',{student_name:student?.name,student_id:student?.id,session_id:sessionId,question_text:text.substring(0,200),chapter:ch});
-  const sys=`You are Hindonomics, ECO5305 tutor by Dr. Hind Lebdaoui. HYBRID method: 1) PROBE one Socratic question (1 sentence). 2) EXPLAIN step by step with numbered steps and examples. 3) CHECK with one comprehension question. Correct→affirm+deepen. Confused→re-explain+check. Ch.5 scope ONLY: isoquants,MRTS,isocosts,cost minimization(MRTS=w/r),profit max(VMPL=w,MR=MC),economies of scale. Redirect other Ch.5 topics politely. Material:\n${MATERIAL}`;
+  const inp=document.getElementById('uInput');
+  const text=inp.value.trim();
+  if(!text)return;
+  inp.value='';
+  addMsg('user',text);
+  chatHistory.push({role:'user',content:text});
+  showTyping();
+  const sys='You are Hindonomics, ECO5305 tutor by Dr. Hind Lebdaoui. HYBRID method: 1) PROBE one Socratic question (1 sentence). 2) EXPLAIN step by step with numbered steps and examples. 3) CHECK with one comprehension question. If correct affirm and deepen. If confused re-explain and check. Ch.5 scope ONLY: isoquants, MRTS, isocosts, cost minimization, profit maximization where VMPL=w and MR=MC, and economies of scale. Also cover Giffen goods, Veblen effect, income and substitution effects, discounting principle, and incremental principle. Material: '+MATERIAL;
   try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages:history})});
-    const d=await r.json();
-    const rep=d.content?.find(b=>b.type==='text')?.text||'Something went wrong. Please try again.';
-    rmTyping();addMsg('bot',rep);history.push({role:'assistant',content:rep});
-  }catch(e){rmTyping();addMsg('bot','Something went wrong. Please try again.')}
+    const response=await fetch(API,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({messages:chatHistory,system:sys})
+    });
+    if(!response.ok){
+      const err=await response.json();
+      rmTyping();
+      addMsg('bot','Error: '+JSON.stringify(err));
+      return;
+    }
+    const data=await response.json();
+    const rep=data.content&&data.content[0]&&data.content[0].text?data.content[0].text:'Something went wrong. Please try again.';
+    rmTyping();
+    addMsg('bot',rep);
+    chatHistory.push({role:'assistant',content:rep});
+  }catch(e){
+    rmTyping();
+    addMsg('bot','Network error: '+e.message);
+  }
 }
 </script>
 </body>
